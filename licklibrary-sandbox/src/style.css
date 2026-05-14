@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'HelveticaNeueHeavy';
+  src: url('/HelveticaNeue-Heavy.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@theme {
+  --color-brand: #EE7267;
+  --font-sans: 'Open Sans', sans-serif;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.font-heavy {
+  font-family: 'HelveticaNeueHeavy', sans-serif;
+  font-weight: 900;
+}
