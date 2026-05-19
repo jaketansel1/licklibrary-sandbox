@@ -19,7 +19,6 @@ function selectAnswer(key, value) {
   currentStep.value++
 }
 
-// toggle for multi-select genres
 function toggleGenre(genre) {
   const genres = answers.value.genres
   const index = genres.indexOf(genre)
@@ -57,21 +56,20 @@ function showResults() {
   })
 }
 
-// title and subtitle update automatically when currentStep changes
 const stepTitle = computed(() => {
   const titles = {
-    1: 'Find the right lessons for you',
-    2: 'What level are you at?',
-    3: 'What kind of music do you enjoy?',
-    4: 'How much time do you have each week?',
-    5: 'Any artists or songs you like?'
+    1: 'What brings you here today?',
+    2: 'How would you describe your playing?',
+    3: 'What kind of music moves you?',
+    4: 'How much time can you give it?',
+    5: 'Any artists or songs you love?'
   }
   return titles[currentStep.value]
 })
 
 const stepSubtitle = computed(() => {
   const subtitles = {
-    1: 'Takes ~30 seconds · We\'ll recommend lessons based on your answers',
+    1: 'We\'ll find the right lessons for where you are right now',
     2: '',
     3: '',
     4: '',
@@ -82,163 +80,184 @@ const stepSubtitle = computed(() => {
 </script>
 
 <template>
-  <div class="bg-[#1a1a1a] border border-white/5 rounded-xl p-10 shrink-0">
+  <div class="relative shrink-0">
 
-   <!-- Header -->
-<div :class="currentStep > 1 ? 'mb-5' : 'mb-6'">
+    <!-- Ambient glow -->
+    <div
+      class="absolute -inset-4 rounded-2xl opacity-25 blur-2xl pointer-events-none"
+      style="background: radial-gradient(ellipse at 60% 50%, #000000 0%, #000000 30%, transparent 80%)"
+    ></div>
 
-  <!-- Steps 2-5 Layout -->
-  <template v-if="currentStep > 1">
+    <!-- Glass card -->
+    <div
+      class="relative border border-white/10 rounded-xl p-10"
+      style="background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%); backdrop-filter: blur(2.5px)"
+    >
 
-    <!-- Top Row -->
-    <div class="flex items-center justify-between mb-6">
-      <button
-        @click="goBack"
-class="text-white/30 hover:text-white/60 transition text-xs"      >
-        ← Back
-      </button>
+      <!-- Header -->
+      <div class="mb-6">
 
-      <span class="text-white/30 text-sm">
-        {{ currentStep }}/5
-      </span>
-    </div>
+        <!-- Steps 2-5 -->
+        <template v-if="currentStep > 1">
+          <div class="flex items-center justify-between mb-4">
+            <button @click="goBack" class="text-white/30 hover:text-white/60 transition text-xs">
+              ← Back
+            </button>
+            <!-- Dots + counter -->
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5">
+                <div
+                  v-for="step in 5"
+                  :key="step"
+                  :class="step === currentStep
+                    ? 'bg-brand w-4 h-1.5 rounded-full'
+                    : step < currentStep
+                      ? 'bg-brand/50 w-1.5 h-1.5 rounded-full'
+                      : 'bg-white/20 w-1.5 h-1.5 rounded-full'"
+                  class="transition-all duration-300"
+                ></div>
+              </div>
+              <span class="text-white/20 text-xs tracking-wide">{{ currentStep }}/5</span>
+            </div>
+          </div>
+          <h2 class="text-white font-bold text-2xl leading-tight mb-1">{{ stepTitle }}</h2>
+          <p v-if="stepSubtitle" class="text-white/40 text-sm">{{ stepSubtitle }}</p>
+        </template>
 
-   <!-- Title + Subtitle -->
-<div class="-mt-1">
-  <h2 class="text-white font-bold text-2xl leading-tight mb-1">
-    {{ stepTitle }}
-  </h2>
+        <!-- Step 1 -->
+        <template v-else>
+          <div class="flex items-center justify-between mb-3">
+            <!-- Intelligence cue -->
+            <div class="flex items-center gap-1.5">
+              <span class="text-brand text-xs">✦</span>
+              <span class="text-brand text-xs tracking-wide">AI-powered recommendations</span>
+            </div>
+            <!-- Dots + counter -->
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5">
+                <div
+                  v-for="step in 5"
+                  :key="step"
+                  :class="step === currentStep
+                    ? 'bg-brand w-4 h-1.5 rounded-full'
+                    : step < currentStep
+                      ? 'bg-brand/50 w-1.5 h-1.5 rounded-full'
+                      : 'bg-white/20 w-1.5 h-1.5 rounded-full'"
+                  class="transition-all duration-300"
+                ></div>
+              </div>
+              <span class="text-white/20 text-xs tracking-wide">{{ currentStep }}/5</span>
+            </div>
+          </div>
+          <h2 class="text-white font-bold text-2xl mb-3">{{ stepTitle }}</h2>
+          <p class="text-white/40 text-sm">{{ stepSubtitle }}</p>
+        </template>
 
-  <p
-    v-if="stepSubtitle"
-    class="text-white/40 text-sm"
-  >
-    {{ stepSubtitle }}
-  </p>
-</div>
+      </div>
 
-  </template>
-
-  <!-- Step 1 Layout -->
-  <template v-else>
-    <div class="flex items-center justify-between mb-2">
-      <h2 class="text-white font-bold text-2xl">
-        {{ stepTitle }}
-      </h2>
-
-      <span class="text-white/30 text-sm">
-        {{ currentStep }}/5
-      </span>
-    </div>
-
-    <p class="text-white/40 text-sm">
-      {{ stepSubtitle }}
-    </p>
-  </template>
-
-</div>
-
-    <!-- Step 1 - Goal -->
-    <div v-if="currentStep === 1" class="flex items-center gap-3 flex-wrap">
-      <button
-        v-for="option in [
-          { label: '🎸 Learn songs', value: 'learn-songs' },
-          { label: '⚡ Improve technique', value: 'improve-technique' },
-          { label: '🔁 Get back into playing', value: 'get-back' },
-          { label: '🎯 Just exploring', value: 'exploring' }
-        ]"
-        :key="option.value"
-        @click="selectAnswer('goal', option.value)"
-        :class="answers.goal === option.value
-          ? 'border-brand text-brand bg-brand/10'
-          : 'border-white/20 text-white/70 hover:border-white/50 hover:text-white'"
-        class="border text-sm font-medium px-6 py-3 rounded-full transition"
-      >
-        {{ option.label }}
-      </button>
-    </div>
-
-    <!-- Step 2 - Level -->
-    <div v-if="currentStep === 2" class="flex items-center gap-3 flex-wrap">
-      <button
-        v-for="option in [
-          { label: '🌱 Beginner', value: 'beginner' },
-          { label: '🔥 Intermediate', value: 'intermediate' },
-          { label: '⚡ Advanced', value: 'advanced' },
-          { label: '🤷 Not sure', value: 'not-sure' }
-        ]"
-        :key="option.value"
-        @click="selectAnswer('level', option.value)"
-        :class="answers.level === option.value
-          ? 'border-brand text-brand bg-brand/10'
-          : 'border-white/20 text-white/70 hover:border-white/50 hover:text-white'"
-        class="border text-sm font-medium px-6 py-3 rounded-full transition"
-      >
-        {{ option.label }}
-      </button>
-    </div>
-
-    <!-- Step 3 - Genres (multi-select) -->
-    <div v-if="currentStep === 3">
-      <div class="flex items-center gap-3 flex-wrap mb-6">
+      <!-- Step 1 - Goal -->
+      <div v-if="currentStep === 1" class="flex items-center gap-3 flex-wrap">
         <button
-          v-for="genre in ['🎸 Classic Rock', &quot;🔥 80's Rock&quot;, '⚡ Rock', '🎵 Blues', '🤘 Metal', '🪵 Acoustic', '🤠 Country', '🎼 Fusion', '🎷 Jazz', '🎤 Pop']"
-          :key="genre"
-          @click="toggleGenre(genre)"
-          :class="isSelected(genre)
-            ? 'border-brand text-brand bg-brand/10'
-            : 'border-white/20 text-white/70 hover:border-white/50 hover:text-white'"
-          class="border text-sm font-medium px-6 py-3 rounded-full transition"
+          v-for="option in [
+            { label: '🎸 Learn songs I love', value: 'learn-songs' },
+            { label: '⚡ Improve faster', value: 'improve-technique' },
+            { label: '🔥 Get inspired again', value: 'get-back' },
+            { label: '🧭 Help me find where to start', value: 'exploring' }
+          ]"
+          :key="option.value"
+          @click="selectAnswer('goal', option.value)"
+          :class="answers.goal === option.value
+            ? 'border-brand text-white bg-brand scale-105 shadow-[0_0_12px_rgba(255,153,17,0.3)]'
+            : 'border-white/15 text-white/60 bg-white/10 hover:border-brand/50 hover:text-white hover:bg-white/15 hover:shadow-[0_0_8px_rgba(255,153,17,0.15)]'"
+          class="border text-sm font-medium px-5 py-3.5 rounded-full transition-all duration-200 ease-out"
         >
-          {{ genre }}
+          {{ option.label }}
         </button>
       </div>
-      <div class="flex justify-end">
-  <button
-    @click="nextStep"
-    class="bg-brand hover:bg-brand/90 text-white text-sm font-semibold px-8 py-3 rounded-full transition"
-  >
-    Next →
-  </button>
-</div>
-    </div>
 
-    <!-- Step 4 - Time -->
-    <div v-if="currentStep === 4" class="flex items-center gap-3 flex-wrap">
-      <button
-        v-for="option in [
-          { label: '⏱️ Just a little (30–60 mins)', value: 'little' },
-          { label: '🕐 A few hours (1–3 hrs)', value: 'few-hours' },
-          { label: '🔥 I\'m committed (3+ hrs)', value: 'committed' }
-        ]"
-        :key="option.value"
-        @click="selectAnswer('time', option.value)"
-        :class="answers.time === option.value
-          ? 'border-brand text-brand bg-brand/10'
-          : 'border-white/20 text-white/70 hover:border-white/50 hover:text-white'"
-        class="border text-sm font-medium px-6 py-3 rounded-full transition"
-      >
-        {{ option.label }}
-      </button>
-    </div>
+      <!-- Step 2 - Level -->
+      <div v-if="currentStep === 2" class="flex items-center gap-3 flex-wrap">
+        <button
+          v-for="option in [
+            { label: '🌱 Just starting out', value: 'beginner' },
+            { label: '🔥 Getting there', value: 'intermediate' },
+            { label: '⚡ Pretty advanced', value: 'advanced' },
+            { label: '🤷 Honestly not sure', value: 'not-sure' }
+          ]"
+          :key="option.value"
+          @click="selectAnswer('level', option.value)"
+          :class="answers.level === option.value
+            ? 'border-brand text-white bg-brand scale-105 shadow-[0_0_12px_rgba(255,153,17,0.3)]'
+            : 'border-white/15 text-white/60 bg-white/10 hover:border-brand/50 hover:text-white hover:bg-white/15 hover:shadow-[0_0_8px_rgba(255,153,17,0.15)]'"
+          class="border text-sm font-medium px-5 py-3.5 rounded-full transition-all duration-200 ease-out"
+        >
+          {{ option.label }}
+        </button>
+      </div>
 
-    <!-- Step 5 - Artists -->
-    <div v-if="currentStep === 5">
-      <input
-        v-model="answers.artists"
-        type="text"
-        placeholder="e.g. Hendrix, Clapton, SRV, Metallica…"
-        class="w-full bg-white/5 border border-white/20 text-white placeholder-white/30 text-sm px-6 py-3 rounded-full mb-6 focus:outline-none focus:border-brand"
-      />
-      <div class="flex justify-end">
-  <button
-    @click="showResults"
-    class="bg-brand hover:bg-brand/90 text-white text-sm font-semibold px-8 py-3 rounded-full transition"
-  >
-    Generate recommendations →
-  </button>
-</div>
-    </div>
+      <!-- Step 3 - Genres -->
+      <div v-if="currentStep === 3">
+        <div class="flex items-center gap-3 flex-wrap mb-6">
+          <button
+            v-for="genre in ['🎸 Classic Rock', &quot;🔥 80's Rock&quot;, '⚡ Rock', '🎵 Blues', '🤘 Metal', '🪵 Acoustic', '🤠 Country', '🎼 Fusion', '🎷 Jazz', '🎤 Pop']"
+            :key="genre"
+            @click="toggleGenre(genre)"
+            :class="isSelected(genre)
+              ? 'border-brand text-white bg-brand scale-105 shadow-[0_0_12px_rgba(255,153,17,0.3)]'
+              : 'border-white/15 text-white/60 bg-white/10 hover:border-brand/50 hover:text-white hover:bg-white/15 hover:shadow-[0_0_8px_rgba(255,153,17,0.15)]'"
+            class="border text-sm font-medium px-5 py-3.5 rounded-full transition-all duration-200 ease-out"
+          >
+            {{ genre }}
+          </button>
+        </div>
+        <div class="flex justify-end">
+          <button
+  @click="nextStep"
+  :disabled="answers.genres.length === 0"
+  :class="answers.genres.length === 0
+    ? 'bg-white/10 text-white/30 cursor-not-allowed'
+    : 'bg-brand hover:bg-brand/90 text-white cursor-pointer'"
+  class="text-sm font-semibold px-8 py-3.5 rounded-full transition-all duration-200"
+>
+  Next →
+</button>
+        </div>
+      </div>
 
+      <!-- Step 4 - Time -->
+      <div v-if="currentStep === 4" class="flex items-center gap-3 flex-wrap">
+        <button
+          v-for="option in [
+            { label: '⏱️ Short sessions, 30–60 mins', value: 'little' },
+            { label: '🕐 A few hours a week', value: 'few-hours' },
+            { label: '🔥 I\'m fully committed', value: 'committed' }
+          ]"
+          :key="option.value"
+          @click="selectAnswer('time', option.value)"
+          :class="answers.time === option.value
+            ? 'border-brand text-white bg-brand scale-105 shadow-[0_0_12px_rgba(255,153,17,0.3)]'
+            : 'border-white/15 text-white/60 bg-white/10 hover:border-brand/50 hover:text-white hover:bg-white/15 hover:shadow-[0_0_8px_rgba(255,153,17,0.15)]'"
+          class="border text-sm font-medium px-5 py-3.5 rounded-full transition-all duration-200 ease-out"
+        >
+          {{ option.label }}
+        </button>
+      </div>
+
+      <!-- Step 5 - Artists -->
+      <div v-if="currentStep === 5">
+        <input
+          v-model="answers.artists"
+          type="text"
+          placeholder="e.g. Hendrix, Clapton, SRV, Metallica…"
+          class="w-full bg-white/5 border border-white/15 text-white placeholder-white/30 text-sm px-5 py-3.5 rounded-full mb-6 focus:outline-none focus:border-brand transition-all duration-200"
+        />
+        <div class="flex justify-end">
+          <button @click="showResults" class="bg-brand hover:bg-brand/90 text-white text-sm font-semibold px-8 py-3.5 rounded-full transition-all duration-200">
+            Show my recommendations →
+          </button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </template>
