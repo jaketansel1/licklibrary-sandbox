@@ -1,11 +1,11 @@
 <template>
-  <section class="py-16">
+  <section class="py-4">
 
     <!-- Header - contained to 1320px -->
     <div class="max-w-[1320px] mx-auto px-8">
       <div class="flex items-center justify-between mb-6">
         <h2 class="font-heavy text-3xl">
-          Featured <span class="text-brand">Classic Album</span> Guitar Courses
+          Featured <span class="text-brand">Guitar Technique</span> Courses
         </h2>
         <div class="flex items-center gap-2">
           <button @click="scrollLeft" class="w-8 h-8 border border-white/20 hover:border-white/50 text-white/70 hover:text-white flex items-center justify-center transition">
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <!-- Cards - full width with left padding -->
+    <!-- Cards - full width with aligned left padding -->
     <div
       ref="carousel"
       class="flex gap-4 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden"
@@ -65,15 +65,15 @@ function scrollRight() {
 }
 
 const courses = [
-  { id: 1, title: 'Guns N\' Roses — Appetite for Destruction', tutor: 'Danny Gill', category: 'Classic Albums', image: '/course-1.jpg' },
-  { id: 2, title: 'Pink Floyd — The Dark Side of the Moon', tutor: 'Jamie Humphries', category: 'Classic Albums', image: '/course-2.jpg' },
-  { id: 3, title: 'Metallica — The Black Album', tutor: 'Andy James', category: 'Classic Albums', image: '/course-3.jpg' },
-  { id: 4, title: 'Led Zeppelin — IV', tutor: 'Jamie Humphries', category: 'Classic Albums', image: '/course-4.jpg' },
-  { id: 5, title: 'AC/DC — Highway to Hell', tutor: 'Danny Gill', category: 'Classic Albums', image: '/course-5.jpg' },
-  { id: 6, title: 'Jimi Hendrix — Are You Experienced', tutor: 'Jamie Humphries', category: 'Classic Albums', image: '/course-6.jpg' },
-  { id: 7, title: 'Black Sabbath — Paranoid', tutor: 'Andy James', category: 'Classic Albums', image: '/course-7.jpg' },
-  { id: 8, title: 'Eagles — Hotel California', tutor: 'Michael Casswell', category: 'Classic Albums', image: '/course-8.jpg' },
-  { id: 9, title: 'ZZ Top — Eliminator', tutor: 'Danny Gill', category: 'Classic Albums', image: '/course-9.jpg' },
-  { id: 10, title: 'Ozzy Osbourne — Blizzard of Ozz', tutor: 'Andy James', category: 'Classic Albums', image: '/course-10.jpg' },
+  { id: 1, title: 'Shred Fusion', tutor: 'Francesco Fareri', image: '/course-1.jpg' },
+  { id: 2, title: 'Rock Rhythm Guitar', tutor: 'Danny Gill', image: '/course-2.jpg' },
+  { id: 3, title: 'Virtuoso Concepts', tutor: 'Tom Quayle', image: '/course-3.jpg' },
+  { id: 4, title: 'Playing Like A Singer', tutor: 'Michael Casswell', image: '/course-4.jpg' },
+  { id: 5, title: 'Guitar Gym Vol. 3', tutor: 'Sam Bell', image: '/course-5.jpg' },
+  { id: 6, title: 'Mastering Modes', tutor: 'Andy James', image: '/course-6.jpg' },
+  { id: 7, title: 'Metal Rhythm Vol. 4', tutor: 'Sam Bell', image: '/course-7.jpg' },
+  { id: 8, title: 'Technical Patterns', tutor: 'Francesco Fareri', image: '/course-8.jpg' },
+  { id: 9, title: 'Phrasing & Expression', tutor: 'Michael Casswell', image: '/course-9.jpg' },
+  { id: 10, title: 'Lead Guitar Mastery', tutor: 'Andy James', image: '/course-10.jpg' },
 ]
 </script>
