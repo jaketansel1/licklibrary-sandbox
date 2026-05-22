@@ -23,7 +23,7 @@
       </div>
 
       <!-- Right: Album collage (bigger than Classic Albums version) -->
-      <div class="flex-[1.1] grid grid-cols-4 grid-rows-4 gap-2">
+      <div class="flex-[1.0] grid grid-cols-4 grid-rows-4 gap-2">
 
         <!-- Featured card -->
         <div

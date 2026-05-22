@@ -1,15 +1,38 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import MegaMenu from './MegaMenu.vue'
+
 defineProps({
   transparent: {
     type: Boolean,
     default: false
   }
 })
+
+const menuOpen = ref(false)
+
+function handleScroll() {
+  menuOpen.value = false
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
-<template>
-  <nav class="w-full" :class="transparent ? 'absolute top-0 left-0 z-50' : 'bg-[#111111]'">
 
+<template>
+  <nav
+   class="w-full"
+  :class="[
+    transparent ? 'absolute top-0 left-0 z-50' : 'bg-[#111111]',
+    menuOpen && transparent ? 'bg-[#111111]' : ''
+  ]"
+  >
     <!-- Upper nav -->
     <div class="flex items-center justify-between px-12 py-4">
       <RouterLink to="/">
@@ -30,20 +53,52 @@ defineProps({
     </div>
 
     <!-- Lower nav -->
-    <div class="flex items-center justify-between px-12 py-4 border-t border-white/0"
-         :class="transparent ? '' : 'bg-[#262626]'">
+    <div
+  class="relative flex items-center justify-between px-12 py-4 border-t border-white/10"
+  :class="transparent && !menuOpen ? '' : 'bg-[#262626]'"
+  @mouseleave="menuOpen = false"
+>
       <div class="flex items-center gap-8">
         <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Home</a>
         <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Guitar Lessons</a>
-        <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Guitar Courses</a>
+
+        <!-- Guitar Courses trigger only -->
+        
+          <a href="#"
+     class="text-sm font-medium uppercase tracking-widest transition duration-200"
+     :class="menuOpen ? 'text-brand' : 'text-white/60 hover:text-white'"
+     @mouseenter="menuOpen = true"
+    >Guitar Courses</a>
+
         <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Backing Tracks</a>
-        <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Learning Paths</a>
+        <RouterLink to="/learning-paths" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Learning Paths</RouterLink>
         <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Blog</a>
       </div>
       <div class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest cursor-pointer">
         Search
       </div>
+
+      <!-- Mega menu sits here so it spans full width -->
+      <Transition name="fade">
+    <MegaMenu v-if="menuOpen" />
+    </Transition>
     </div>
+
+    <!-- Overlay -->
+    <div v-if="menuOpen" class="fixed inset-0 bg-black/60 z-30 pointer-events-none top-[132px]"></div>
 
   </nav>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.20s ease, transform 0.15s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+</style>

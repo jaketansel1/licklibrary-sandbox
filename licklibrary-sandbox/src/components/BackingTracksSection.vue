@@ -3,21 +3,15 @@
 
     <div class="flex items-center gap-16">
 
-      <!-- Left: Video thumbnail -->
-      <div class="flex-1.4 relative rounded-xl overflow-hidden cursor-pointer group">
-        <img
-          src="/backing-tracks.png"
-          alt="Guitar backing tracks"
+      <!-- Left: Video -->
+<div class="w-[60%] relative rounded-xl overflow-hidden cursor-pointer group">        <video
+          src="/backing-tracks.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
           class="w-full h-[500px] object-cover"
-        />
-        <!-- Play button overlay -->
-        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-          <div class="w-16 h-16 bg-brand rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
-        </div>
+        ></video>
       </div>
 
       <!-- Right: Text content -->
@@ -42,5 +36,4 @@
 </template>
 
 <script setup>
-// Static for now — video functionality to be added later
 </script>
