@@ -54,7 +54,7 @@ onUnmounted(() => {
 
     <!-- Lower nav -->
     <div
-  class="relative flex items-center justify-between px-12 py-4 border-t border-white/10"
+  class="relative flex items-center justify-between px-12 py-4"
   :class="transparent && !menuOpen ? '' : 'bg-[#262626]'"
   @mouseleave="menuOpen = false"
 >
