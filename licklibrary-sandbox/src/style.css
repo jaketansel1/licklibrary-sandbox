@@ -9,7 +9,9 @@
 
 @theme {
   --color-brand: #EE7267;
+  --color-secondary: #FD7E14;
   --font-sans: 'Open Sans', sans-serif;
+
 }
 
 body {

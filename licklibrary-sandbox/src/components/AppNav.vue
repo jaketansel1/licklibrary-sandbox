@@ -59,22 +59,22 @@ onUnmounted(() => {
   @mouseleave="menuOpen = false"
 >
       <div class="flex items-center gap-8">
-        <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Home</a>
-        <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Guitar Lessons</a>
+        <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Home</a>
+        <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Guitar Lessons</a>
 
         <!-- Guitar Courses trigger only -->
         
           <a href="#"
      class="text-sm font-medium uppercase tracking-widest transition duration-200"
-     :class="menuOpen ? 'text-brand' : 'text-white/60 hover:text-white'"
+     :class="menuOpen ? 'text-brand' : 'text-white/90 hover:text-white'"
      @mouseenter="menuOpen = true"
     >Guitar Courses</a>
 
-        <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Backing Tracks</a>
-        <RouterLink to="/learning-paths" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Learning Paths</RouterLink>
-        <a href="#" class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest">Blog</a>
+        <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Backing Tracks</a>
+        <RouterLink to="/learning-paths" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Learning Paths</RouterLink>
+        <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Blog</a>
       </div>
-      <div class="text-white/60 hover:text-white text-sm font-medium uppercase tracking-widest cursor-pointer">
+      <div class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest cursor-pointer">
         Search
       </div>
 

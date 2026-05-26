@@ -16,11 +16,11 @@
 
       <!-- Right: Text content -->
       <div class="relative z-10 w-full lg:w-1/2 px-8 lg:px-12 py-16 ">
-        <p class="text-brand text-xs font-bold tracking-widest uppercase mb-4">1-2-1 Coaching</p>
+        <p :class="[props.accentColor, 'text-xs font-bold tracking-widest uppercase mb-4']">1-2-1 Coaching</p>
 
         <h2 class="text-5xl font-heavy text-white leading-tight mb-6">
           Your One-To-One<br />
-          <span class="text-brand">Guitar Tutor</span>
+          <span :class="props.accentColor">Guitar Tutor</span>
         </h2>
 
         <p class="text-gray-400 text-lg leading-relaxed mb-6 max-w-md">
@@ -35,5 +35,10 @@
 </template>
 
 <script setup>
-// Static for now — no logic needed
+const props = defineProps({
+  accentColor: {
+    type: String,
+    default: 'text-brand'
+  }
+})
 </script>
