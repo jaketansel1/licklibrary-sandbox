@@ -24,9 +24,13 @@
           A systematic journey through the essential scales every guitarist needs. From basic pentatonic positions through to major and minor scales — all designed to boost your scale knowledge in just two weeks.
         </p>
         <div class="flex gap-4 mb-10">
-          <button class="bg-secondary text-white text-sm uppercase tracking-wide font-semibold px-8 py-4 hover:brightness-110 transition duration-200">
-            Start Learning Path
-          </button>
+          <button 
+  @click="$router.push(`/learning-paths/1/lesson/1`)"
+  class="bg-secondary text-white text-sm uppercase tracking-wide font-semibold px-8 py-4 hover:brightness-110 transition duration-200">
+  Start Learning Path
+</button>
+
+
           <button class="border border-white/20 text-white/60 text-sm uppercase tracking-wide font-semibold px-8 py-4 hover:bg-white hover:text-black/90 transition duration-200">
             Preview Lessons
           </button>
@@ -104,9 +108,12 @@
             </div>
 
             <div class="flex items-center gap-10 flex-shrink-0">
-              <button class="bg-secondary text-white text-xs uppercase tracking-wide font-semibold px-6 py-3 hover:brightness-110 transition duration-200">
-                Start Lesson
-              </button>
+              <button
+  @click="$router.push(`/learning-paths/${week.id}/lesson/1`)"
+  class="bg-secondary text-white text-xs uppercase tracking-wide font-semibold px-6 py-3 hover:brightness-110 transition duration-200"
+>
+  Start Lesson
+</button>
               <button class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:border-white/30 hover:text-white/60 transition duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M6 9l6 6 6-6"/>
