@@ -23,20 +23,25 @@ onUnmounted(() => {
 
     <!-- Background image -->
     <img
-  v-for="(image, index) in images"
-  :key="image"
-  :src="image"
-  alt="Hero"
-  class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms]"
-  :class="index === activeImage ? 'opacity-100' : 'opacity-0'"
-  style="object-position: center 15%"
-/>
+      v-for="(image, index) in images"
+      :key="image"
+      :src="image"
+      alt="Hero"
+      class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms]"
+      :class="index === activeImage ? 'opacity-100' : 'opacity-0'"
+      style="object-position: center 15%"
+    />
 
     <!-- Dark gradient overlay -->
     <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-black/10"></div>
 
     <!-- Bottom fade to page background -->
-<div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#0a0a0a]"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#0a0a0a]"></div>
+
+    <!-- Card scrim — full width, outside container -->
+    <div class="absolute bottom-0 left-0 right-0 h-64 pointer-events-none"
+      style="background: linear-gradient(to top, rgba(8,8,8,0.92) 0%, transparent 100%)">
+    </div>
 
     <!-- Content -->
     <div class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col justify-center pt-32" style="height: 100vh">
@@ -49,6 +54,7 @@ onUnmounted(() => {
         Learn from world-class tutors. 10,000+ lessons.<br>
         Free 1-to-1 coaching.
       </p>
+
       <DiscoveryBanner />
     </div>
 
