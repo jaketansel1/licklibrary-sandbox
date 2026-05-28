@@ -11,11 +11,11 @@
           <span class="text-brand">Iconic Guitar</span><br>
           Songs
         </h2>
-        <p class="text-white/50 text-sm leading-relaxed mb-4">
+        <p class="text-white/50 text-lg leading-relaxed mb-4">
           Across rock, blues, metal & more
         </p>
-        <p class="text-white/50 text-sm leading-relaxed mb-8">
-          Step-by-step breakdowns from riffs to full solos. Slow it down, isolate parts, and play along.
+        <p class="text-white/50 text-lg leading-relaxed mb-8 max-w-md">
+          Learn the songs that shaped generations with step-by-step lessons from world-class guitar tutors. From legendary riffs to iconic solos, break down every technique at your own pace with interactive tools designed to help you practise smarter.
         </p>
         <button class="border border-white text-white text-sm font-semibold px-6 py-3 uppercase tracking-wide hover:bg-white hover:text-black transition">
           Explore All Songs

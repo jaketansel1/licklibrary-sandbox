@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-[#0a0a0a] pt-0 pb-24 px-6">
+  <section class="bg-[#0a0a0a] pt-24 pb-24 px-6">
 
     <!-- Headline -->
     <div class="max-w-6xl mx-auto text-center mb-10">

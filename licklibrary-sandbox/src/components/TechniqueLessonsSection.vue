@@ -4,7 +4,7 @@
     <div class="flex items-center gap-16">
 
       <!-- Left: Course cards image -->
-      <div class="flex-1">
+      <div style="flex: 1.3">
         <img
           src="/ipads.png"
           alt="Guitar technique courses"
@@ -13,7 +13,7 @@
       </div>
 
       <!-- Right: Text content -->
-      <div class="flex-1">
+      <div style="flex: 0.8">
         <p class="text-brand text-xs tracking-widest uppercase mb-4">Technique Lessons</p>
         <h2 class="font-heavy text-5xl leading-tight mb-6">
           Master Essential<br>

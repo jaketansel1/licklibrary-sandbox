@@ -1,5 +1,5 @@
 <template>
-  <section class="py-10">
+  <section class="py-0">
 
     <!-- Heading -->
     <div class="text-center mb-10">

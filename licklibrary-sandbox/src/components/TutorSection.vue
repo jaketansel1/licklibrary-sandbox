@@ -24,7 +24,7 @@
         </h2>
 
         <p class="text-gray-400 text-lg leading-relaxed mb-6 max-w-md">
-          Stuck on a riff? Struggling with chords? Get free personal coaching with a pro tutor via Zoom.
+          Stuck on a riff? Struggling with chords? Get free personal coaching with a pro tutor via Zoom. Whether you're refining technique, learning songs faster, or breaking through frustrating plateaus, our tutors provide personalised guidance tailored to your playing style and goals.
         </p>
 
         <p class="text-gray-500 text-base">Live feedback. Real progress.</p>

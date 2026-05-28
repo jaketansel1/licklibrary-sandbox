@@ -2,9 +2,56 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppNav from '../components/AppNav.vue'
+import FooterSection from '../components/FooterSection.vue'
 
 const route = useRoute()
 const router = useRouter()
+
+import PathCard from '../components/PathCard.vue'
+
+const recommendedPaths = [
+  {
+    id: 1,
+    title: '2 Week Scales Bootcamp',
+    tutor: 'Various Tutors',
+    level: 'Beginner',
+    genre: 'Rock',
+    image: '/learningpath-1.jpg',
+    description: 'A systematic journey through the essential scales every guitarist needs. From basic pentatonic positions through to major and minor scales — all designed to boost your scale knowledge in just two weeks.'
+  },
+  {
+    id: 2,
+    title: '2 Week Technique Builder',
+    tutor: 'Sam Bell',
+    level: 'Beginner',
+    genre: 'Rock',
+    image: '/learningpath-2.jpg',
+    description: 'Strengthen your picking and fretting hand technique with focused workouts and exercises. Noticeable results in just two weeks — the fast track your technique needs.'
+  },
+  {
+    id: 3,
+    title: '10 Classic Rock Songs in 10 Days',
+    tutor: 'Rich Shaw',
+    level: 'Intermediate',
+    genre: 'Rock',
+    image: '/learningpath-3.jpg',
+    description: 'Learn ten essential classic rock songs every guitarist should know. Covers the chords, techniques and scales behind each song with a helpful structured guide.'
+  },
+]
+
+// Holds extra courses from the API that aren't shown yet
+const reserves = ref([])
+
+// Removes a course by ID and replaces it with the next reserve if available
+function dismissCourse(courseId) {
+  const index = courses.value.findIndex(c => c.id === courseId)
+  if (reserves.value.length > 0) {
+    const replacement = reserves.value.shift()
+    courses.value.splice(index, 1, replacement)
+  } else {
+    courses.value.splice(index, 1)
+  }
+}
 
 // Read answers from URL
 const answers = {
@@ -75,7 +122,10 @@ async function fetchRecommendations() {
 
     if (!response.ok) throw new Error(data.message || 'API error')
 
-    courses.value = data.recommendations.items
+// Slice the API results — show first 8, keep the rest as reserves for replacements
+    const items = data.recommendations.items
+    courses.value = items.slice(0, 8)
+    reserves.value = items.slice(8)
     aiResponse.value = data.ai_response
 
   } catch (err) {
@@ -103,8 +153,7 @@ function editAnswers() {
       <!-- Header -->
       <div class="mb-10">
         <p class="text-brand text-xs tracking-widest uppercase mb-3">Personalised for you</p>
-        <h1 class="font-heavy text-5xl mb-3">Your recommended lessons</h1>
-        <p class="text-white/50 text-base mb-6">{{ aiResponse || 'Based on your answers, here are the lessons we think you\'ll enjoy most.' }}</p>
+<h1 class="font-heavy text-5xl mb-3">Your recommended courses</h1>        <p class="text-white/50 text-base mb-6">{{ aiResponse || 'Based on your answers, here are the lessons we think you\'ll enjoy most.' }}</p>
 
         <!-- Answer summary pills -->
         <div class="flex items-center justify-between">
@@ -173,12 +222,12 @@ function editAnswers() {
       <!-- Results grid -->
       <div v-else class="grid grid-cols-4 gap-6">
         <div
-          v-for="course in courses"
-          :key="course.id"
-          class="bg-[#111111] rounded-xl overflow-hidden cursor-pointer group"
-        >
+  v-for="course in courses"
+  :key="course.id"
+  class="bg-[#111111] rounded-xl overflow-hidden cursor-pointer group flex flex-col"
+>
           <!-- Thumbnail -->
-          <div class="aspect-[3/4] bg-zinc-800 relative overflow-hidden">
+          <div class="aspect-[2/3] bg-zinc-800 relative overflow-hidden">
             <img
               v-if="course.thumbnail"
               :src="course.thumbnail"
@@ -193,10 +242,21 @@ function editAnswers() {
                 {{ course.genre_slug?.replace(/-/g, ' ') }}
               </span>
             </div>
+<!-- Dismiss button -->
+<button
+  @click.stop="dismissCourse(course.id)"
+  class="absolute top-3 right-3 w-6 h-6 bg-black/60 hover:bg-black/90 text-white/70 hover:text-white rounded-full flex items-center justify-center transition opacity-0 group-hover:opacity-100"
+>
+  ✕
+</button>
+
           </div>
 
+
+
           <!-- Card content -->
-          <div class="p-4">
+          <div class="p-4 pb-4 flex flex-col flex-1">
+            
             <h3 class="text-white font-bold text-base mb-1 leading-snug">{{ course.title }}</h3>
             <p class="text-white/50 text-sm capitalize">
   {{ course.artists?.map(a => a.name).join(', ') }}
@@ -204,26 +264,38 @@ function editAnswers() {
 </p>
 
 <!-- Why this? panel -->
-<div class="mt-4 mb-4 border border-white/10 rounded-lg p-3 bg-white/[0.03]">
-  <p class="text-[#EE7267] text-[10px] font-bold tracking-widest uppercase mb-2">Why this?</p>
-  <p class="text-white/60 text-xs leading-relaxed">
-    A perfect match for rock fans — covers iconic riffs and dark tonality from one of rocks greatest albums. (To be replaced with AI logic/API response later.)
-  </p>
-</div>
-
-            <!-- View button -->
-            
-              <a
-              :href="course.url"
-              target="_blank"
-              class="block w-full border border-white/20 hover:border-brand hover:bg-brand text-white/70 hover:text-white text-sm py-2.5 rounded-lg transition text-center"
-            >
-              View lesson
-            </a>
+<p class="text-white/50 text-xs leading-relaxed mt-3 mb-4 line-clamp-3">
+  {{ course.description || 'A structured course designed to help you develop your guitar skills with expert guidance from world-class tutors.' }}
+</p>
+ <!-- View button -->
+<a
+  :href="course.url"
+  target="_blank"
+  class="block w-full border border-white/20 group-hover:border-brand group-hover:bg-brand text-white/70 group-hover:text-white text-sm py-2.5 rounded-lg transition text-center mt-auto"
+>
+  View course
+</a>
           </div>
         </div>
       </div>
 
     </div>
+
+    <!-- Recommended Learning Paths -->
+<div class="mt-10 max-w-[1320px] mx-auto px-6 pb-24">
+  <h2 class="font-heavy text-3xl mb-8">Recommended Learning Paths</h2>
+
+  <div class="grid grid-cols-3 gap-6">
+    <PathCard
+  v-for="path in recommendedPaths"
+  :key="path.id"
+  :path="path"
+  :contained="true"
+/>
+  </div>
+</div>
+
+<FooterSection />
+
   </div>
 </template>

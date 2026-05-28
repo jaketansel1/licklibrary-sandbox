@@ -1,8 +1,8 @@
 <template>
-  <section class="py-16">
+  <section class="py-12">
 
     <!-- Header - contained to 1320px -->
-    <div class="max-w-[1320px] mx-auto px-8">
+    <div class="max-w-[1320px] mx-auto px-6 w-full">
       <div class="flex items-center justify-between mb-6">
         <h2 class="font-heavy text-3xl">
           Featured <span class="text-brand">Classic Album</span> Guitar Courses
@@ -18,36 +18,37 @@
       </div>
     </div>
 
-    <!-- Cards - full width with left padding -->
-    <div
-      ref="carousel"
-      class="flex gap-4 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden"
-style="scroll-behavior: smooth; padding-left: calc(50vw - 634px)"
-    >
+    <!-- Cards -->
+    <div class="max-w-[1320px] mx-auto px-6 overflow-hidden">
       <div
-        v-for="course in courses"
-        :key="course.id"
-        class="shrink-0 w-52 cursor-pointer group"
+        ref="carousel"
+        class="flex gap-4 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden"
+        style="scroll-behavior: smooth;"
       >
-        <div class="aspect-[2/3] rounded-lg overflow-hidden mb-3">
-          <img
-            :src="course.image"
-            :alt="course.title"
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-          />
+        <div
+          v-for="course in courses"
+          :key="course.id"
+          class="shrink-0 w-52 cursor-pointer group"
+        >
+          <div class="aspect-[2/3] rounded-lg overflow-hidden mb-3">
+            <img
+              :src="course.image"
+              :alt="course.title"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+            />
+          </div>
+          <p class="text-white/80 text-sm font-medium leading-snug">{{ course.title }}</p>
+          <p class="text-white/40 text-xs mt-1">{{ course.tutor }}</p>
         </div>
-        <p class="text-white/80 text-sm font-medium leading-snug">{{ course.title }}</p>
-        <p class="text-white/40 text-xs mt-1">{{ course.tutor }}</p>
       </div>
     </div>
 
-    <!-- View all - contained to 1320px -->
-    <div class="max-w-[1320px] mx-auto px-8 mt-8">
+    <!-- View all -->
+    <div class="max-w-[1320px] mx-auto px-6 mt-8">
       <button class="border border-white text-white text-sm font-semibold px-6 py-3 uppercase tracking-wide hover:bg-white hover:text-black transition">
         View All Courses
       </button>
     </div>
-
   </section>
 </template>
 
