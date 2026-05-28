@@ -1,6 +1,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import DiscoveryBanner from './DiscoveryBanner.vue'
+import DiscoveryBannerCard from '../components/DiscoveryBannerCard.vue'
+import DiscoveryBannerLight from '../components/DiscoveryBannerLight.vue'
+import DiscoveryBannerCardV2 from '../components/DiscoveryBannerCardV2.vue'
+
+// Switch banner version: 'card', 'light', 'card-v2'
+const bannerVersion = 'card-v2'
 
 const images = ['/hero.png', '/hero2.png']
 const activeImage = ref(0)
@@ -44,19 +49,28 @@ onUnmounted(() => {
     </div>
 
     <!-- Content -->
-    <div class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col justify-center pt-32" style="height: 100vh">
+    <div class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-32" :class="(bannerVersion === 'bottom-dock' || bannerVersion === 'card-v2') ? 'justify-start pt-48 2xl:pt-64' : 'justify-center'" style="height: 100vh">
       <p class="text-brand text-xs tracking-widest uppercase mb-5">Est. 1992</p>
       <h1 class="text-7xl font-heavy leading-none mb-6">
         Play More Guitar.<br>
         <span class="text-brand">Stay Inspired.</span>
       </h1>
-      <p class="text-white/60 text-base leading-relaxed mb-8">
-        Learn from world-class tutors. 10,000+ lessons.<br>
-        Free 1-to-1 coaching.
-      </p>
+      <p class="text-white/60 text-base leading-relaxed mb-12">
+  Learn from world-class tutors. 10,000+ lessons.<br>
+  Free 1-to-1 coaching.
+</p>
 
-      <DiscoveryBanner />
+<button v-if="bannerVersion === 'bottom-dock' || bannerVersion === 'minimal'" class="self-start bg-[#0BA8F7] hover:bg-[#0BA8F7]/80 text-white text-base font-semibold px-10 py-4 transition mb-8">
+  Start your 14 day free trial
+</button>
+
+      
+
+      <DiscoveryBannerCard v-if="bannerVersion === 'card'" />
+<DiscoveryBannerLight v-else-if="bannerVersion === 'light'" />
+<DiscoveryBannerCardV2 v-else-if="bannerVersion === 'card-v2'" />
     </div>
+
 
   </section>
 </template>
