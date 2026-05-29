@@ -11,7 +11,18 @@
   --color-brand: #EE7267;
   --color-secondary: #FD7E14;
   --font-sans: 'Open Sans', sans-serif;
+  --animate-fadein: fadein 0.7s ease forwards;
+}
 
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 body {
@@ -21,4 +32,21 @@ body {
 .font-heavy {
   font-family: 'HelveticaNeueHeavy', sans-serif;
   font-weight: 900;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+    text-shadow: none;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(238,114,103,0.6);
+  }
+}
+
+@theme {
+  --animate-breathe: breathe 3.5s ease-in-out infinite;
 }
