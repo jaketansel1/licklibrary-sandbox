@@ -2,7 +2,7 @@
   <div class="absolute top-full left-0 w-full bg-[#1a1a1a] border-t border-white/10 z-50">
 
     <!-- ===================== TAB BAR ===================== -->
-    <div class="flex items-center gap-10 px-16 border-b border-white/10">
+    <div class="flex items-center gap-10 px-12 border-b border-white/10">
       <button
         v-for="tab in tabs"
         :key="tab"
@@ -20,10 +20,10 @@
     <div v-if="type === 'lessons'">
 
       <!-- GUITAR LESSONS > FEATURED TAB — rich layout -->
-      <div v-if="activeTab === 'Featured'" class="flex px-20 py-10 gap-16">
+      <div v-if="activeTab === 'Featured'" class="flex px-12 py-8 gap-10">
 
         <!-- Left: Browse + Skill Levels -->
-        <div class="w-52 shrink-0">
+        <div class="w-40 shrink-0">
           <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
           <ul class="space-y-3 mb-8">
             <li v-for="link in lessonsTab.browseLinks" :key="link">
@@ -42,7 +42,7 @@
         <div class="w-px bg-white/10 shrink-0"></div>
 
         <!-- Middle: Popular Lessons -->
-        <div class="w-64 shrink-0">
+        <div class="w-48 shrink-0">
           <p class="text-brand text-xs uppercase tracking-widest mb-5">Popular Lessons</p>
           <ul class="space-y-4">
             <li v-for="lesson in lessonsTab.popular" :key="lesson.title">
@@ -58,15 +58,15 @@
         <div class="w-px bg-white/10 shrink-0"></div>
 
         <!-- Middle: Popular Artists -->
-        <div class="w-80 shrink-0">
+        <div class="w-64 shrink-0">
           <p class="text-brand text-xs uppercase tracking-widest mb-5">Popular Artists</p>
-          <div class="grid grid-cols-3 gap-x-4 gap-y-5">
+          <div class="grid grid-cols-2 gap-x-4 gap-y-5">
             <div
-              v-for="artist in lessonsTab.artists"
+              v-for="artist in lessonsTab.artists.slice(0, 6)"
               :key="artist.name"
               class="flex flex-col items-center gap-2 group cursor-pointer"
             >
-              <div class="w-12 h-12 rounded-full overflow-hidden bg-white/10">
+              <div class="w-18 h-18 rounded-full overflow-hidden bg-white/10">
                 <img :src="artist.image" :alt="artist.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
               </div>
               <span class="text-white/50 group-hover:text-white text-xs transition duration-200">{{ artist.name }}</span>
@@ -82,12 +82,13 @@
           <p class="text-brand text-xs uppercase tracking-widest mb-5">What's Hot</p>
           <div class="flex 2xl:flex-row flex-col gap-4">
             <div
-              v-for="item in lessonsTab.whatsHot"
-              :key="item.title"
-              class="flex-1 group cursor-pointer"
-            >
+        v-for="(item, index) in lessonsTab.whatsHot"
+        :key="item.title"
+        class="flex-1 group cursor-pointer"
+        :class="index === 1 ? 'hidden 2xl:block' : ''"
+>
               <div class="rounded-lg overflow-hidden mb-3 relative">
-                <img :src="item.image" :alt="item.title" class="w-full aspect-[16/9] max-h-52 object-cover group-hover:scale-105 transition duration-500" />
+                <img :src="item.image" :alt="item.title" class="w-full aspect-[16/9]  object-cover group-hover:scale-105 transition duration-500" />
                 <span
                   class="absolute top-2 left-2 text-xs font-semibold uppercase tracking-wide px-2 py-1 rounded"
                   :class="item.level === 'Intermediate' ? 'bg-blue-500/80 text-white' : 'bg-green-600/80 text-white'"
@@ -102,16 +103,30 @@
       </div>
 
       <!-- GUITAR LESSONS > ALL OTHER TABS -->
-      <div v-else class="flex px-20 py-10 gap-16">
+      <div v-else class="flex px-12 py-8 gap-10">
 
         <!-- Left: context-sensitive links -->
-        <div class="w-52 shrink-0">
+        <div class="w-40 shrink-0">
           <template v-if="activeTab === 'Tutors'">
             <p class="text-brand text-xs uppercase tracking-widest mb-4">Tutors</p>
             <ul class="space-y-3">
               <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">All Tutors</a></li>
               <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">Featured Tutors</a></li>
               <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">New Tutors</a></li>
+            </ul>
+          </template>
+          <template v-else-if="activeTab === 'Artists'">
+            <p class="text-brand text-xs uppercase tracking-widest mb-4">Artists</p>
+            <ul class="space-y-3">
+              <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">All Artists</a></li>
+              <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">Most Popular</a></li>
+              <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">A-Z</a></li>
+            </ul>
+          </template>
+          <template v-else-if="activeTab === 'Genre'">
+            <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
+            <ul class="space-y-3">
+              <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">All Genres</a></li>
             </ul>
           </template>
           <template v-else>
@@ -128,6 +143,8 @@
               </li>
             </ul>
           </template>
+
+          
         </div>
 
         <!-- Divider -->
@@ -143,7 +160,7 @@
               class="flex-1 group cursor-pointer"
             >
               <div class="rounded-lg overflow-hidden mb-3">
-                <img :src="tutor.image" :alt="tutor.name" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
+                <img :src="tutor.image" :alt="tutor.name" class="w-full aspect-square object-cover object-top group-hover:scale-105 transition duration-500" />
               </div>
               <p class="text-white text-sm font-semibold">{{ tutor.name }}</p>
             </div>
@@ -167,17 +184,54 @@
           </div>
         </div>
 
+        <!-- GENRE tab -->
+        <div v-else-if="activeTab === 'Genre'" class="flex-1">
+          <div class="flex gap-10">
+
+            <!-- Genre list -->
+            <div class="w-48 shrink-0">
+              <p class="text-brand text-xs uppercase tracking-widest mb-5">Featured</p>
+              <ul class="space-y-3">
+                <li v-for="genre in lessonsTab.genres" :key="genre">
+                  <a href="#" class="text-white/70 hover:text-white text-sm font-medium transition duration-200">{{ genre }}</a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Divider -->
+            <div class="w-px bg-white/10 shrink-0"></div>
+
+            <!-- Genre feature columns -->
+            <div class="flex flex-1 gap-8">
+              <div v-for="genre in lessonsTab.genreFeatures" :key="genre.name" class="flex-1">
+                <p class="text-brand text-xs uppercase tracking-widest mb-4">{{ genre.name }}</p>
+                <div class="flex flex-col gap-3">
+                  <div v-for="lesson in genre.lessons" :key="lesson.title" class="group cursor-pointer">
+                    <div class="rounded-lg overflow-hidden mb-2">
+                      <img :src="lesson.image" :alt="lesson.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
+                    </div>
+                    <p class="text-white text-xs font-semibold leading-snug">{{ lesson.title }}</p>
+                    <p class="text-white/40 text-xs mt-0.5">{{ lesson.tutor }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         <!-- ALL OTHER TABS — grid layout -->
         <div v-else class="flex-1">
           <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured</p>
-          <div class="grid grid-cols-5 gap-4">
+          <div class="grid grid-cols-4 min-[1800px]:grid-cols-5 gap-4">
             <div
-              v-for="item in lessonsTab.gridItems"
-              :key="item.title"
-              class="group cursor-pointer"
-            >
+  v-for="(item, index) in lessonsTab.gridItems"
+  :key="item.title"
+  class="group cursor-pointer"
+  :class="index >= 5 ? 'min-[1800px]:hidden' : ''"
+>
               <div class="rounded-lg overflow-hidden mb-2">
-                <img :src="item.image" :alt="item.title" class="w-full aspect-[16/9] max-h-44 object-cover group-hover:scale-105 transition duration-500" />
+                <img :src="item.image" :alt="item.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
               </div>
               <p class="text-white text-xs font-semibold leading-snug">{{ item.title }}</p>
               <p class="text-white/40 text-xs mt-0.5">{{ item.tutor }}</p>
@@ -190,10 +244,10 @@
     </div>
 
     <!-- ===================== GUITAR COURSES MENU ===================== -->
-    <div v-else class="flex px-20 py-10 gap-16">
+    <div v-else class="flex px-12 py-8 gap-10">
 
       <!-- Left: Browse + Genre -->
-      <div class="w-52 shrink-0">
+      <div class="w-40 shrink-0">
         <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
         <ul class="space-y-3 mb-8">
           <li v-for="link in currentTab.browseLinks" :key="link">
@@ -301,19 +355,57 @@ const lessonsTab = {
     { title: 'Joe Satriani', tutor: 'Jamie Humphries', level: 'Easy', image: '/hero-artist_Joe_Satriani.jpg' },
   ],
   gridItems: [
-    { title: 'Billy Idol', tutor: 'Danny Gill', image: '/hero-artist_Billy_Idol.jpg' },
-    { title: 'Carlos Santana', tutor: 'Jamie Humphries', image: '/hero-artist_Carlos_Santana.jpg' },
-    { title: 'Duran Duran', tutor: 'Danny Gill', image: '/hero-artist_Duran_Duran.jpg' },
-    { title: 'Joe Satriani', tutor: 'Sam Bell', image: '/hero-artist_Joe_Satriani.jpg' },
-    { title: 'Linkin Park', tutor: 'Danny Gill', image: '/hero-artist_Linkin_Park.jpg' },
-  ],
+  { title: 'Billy Idol', tutor: 'Danny Gill', image: '/hero-artist_Billy_Idol.jpg' },
+  { title: 'Carlos Santana', tutor: 'Jamie Humphries', image: '/hero-artist_Carlos_Santana.jpg' },
+  { title: 'Duran Duran', tutor: 'Danny Gill', image: '/hero-artist_Duran_Duran.jpg' },
+  { title: 'Joe Satriani', tutor: 'Sam Bell', image: '/hero-artist_Joe_Satriani.jpg' },
+  { title: 'Linkin Park', tutor: 'Danny Gill', image: '/hero-artist_Linkin_Park.jpg' },
+  { title: 'Neil Young', tutor: 'Rich Shaw', image: '/hero-artist_Neil_Young.jpg' },
+  { title: 'Slash', tutor: 'Danny Gill', image: '/hero-artist_Slash.jpg' },
+  { title: 'Sting', tutor: 'Jamie Humphries', image: '/hero-artist_Sting.jpg' },
+],
 
   tutors: [
   { name: 'Danny Gill', image: '/hero-tutor_Danny_Gill.jpg' },
+  { name: 'Edoardo Taddei', image: '/hero-tutor_Edoardo_Taddei.jpg' },
   { name: 'Eliza Lee', image: '/hero-tutor_Eliza_Lee.jpg' },
+  { name: 'Jamie Humphries', image: '/hero-tutor_Jamie_Humphries.jpg' },
   { name: 'Nick Jennison', image: '/hero-tutor_Nick_Jennison_2.jpg' },
   { name: 'Rich Shaw', image: '/hero-tutor_Rich_Shaw.jpg' },
   { name: 'Sam Bell', image: '/hero-tutor_Sam_Bell.jpg' },
+],
+
+genres: ['Classic Rock', "80's Rock", 'Rock', 'Blues', 'Metal', 'Acoustic', 'Country', 'Fusion', 'Jazz', 'Pop'],
+
+genreFeatures: [
+  {
+    name: 'Classic Rock',
+    lessons: [
+      { title: 'Smoke on the Water', tutor: 'Danny Gill', image: '/hero-artist_Deep_Purple.jpg' },
+      { title: 'Hotel California', tutor: 'Rich Shaw', image: '/hero-artist_Eagles.jpg' },
+    ]
+  },
+  {
+    name: "80's Rock",
+    lessons: [
+      { title: "Sweet Child O'Mine", tutor: 'Danny Gill', image: '/hero-artist_Guns_N_Roses.jpg' },
+      { title: 'Pour Some Sugar on Me', tutor: 'Jamie Humphries', image: '/hero-artist_Def_Leppard.jpg' },
+    ]
+  },
+  {
+    name: 'Blues',
+    lessons: [
+      { title: 'Pride and Joy', tutor: 'Danny Gill', image: '/hero-artist_Stevie_Ray_Vaughan.jpg' },
+      { title: 'The Thrill is Gone', tutor: 'Sam Bell', image: '/hero-artist_BB_King.jpg' },
+    ]
+  },
+  {
+    name: 'Metal',
+    lessons: [
+      { title: 'Enter Sandman', tutor: 'Jamie Humphries', image: '/hero-artist_Metallica.jpg' },
+      { title: 'Master of Puppets', tutor: 'Danny Gill', image: '/hero-artist_Metallica_3.jpg' },
+    ]
+  },
 ],
 }
 
