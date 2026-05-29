@@ -10,6 +10,7 @@ defineProps({
 })
 
 const menuOpen = ref(false)
+const activeMenu = ref('')
 
 function handleScroll() {
   menuOpen.value = false
@@ -60,14 +61,18 @@ onUnmounted(() => {
 >
       <div class="flex items-center gap-8">
         <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Home</a>
-        <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Guitar Lessons</a>
+        <a href="#"
+  class="text-sm font-medium uppercase tracking-widest transition duration-200"
+  :class="menuOpen && activeMenu === 'lessons' ? 'text-brand' : 'text-white/90 hover:text-white'"
+  @mouseenter="menuOpen = true; activeMenu = 'lessons'"
+>Guitar Lessons</a>
 
         <!-- Guitar Courses trigger only -->
         
           <a href="#"
      class="text-sm font-medium uppercase tracking-widest transition duration-200"
-     :class="menuOpen ? 'text-brand' : 'text-white/90 hover:text-white'"
-     @mouseenter="menuOpen = true"
+     :class="menuOpen && activeMenu === 'courses' ? 'text-brand' : 'text-white/90 hover:text-white'"
+     @mouseenter="menuOpen = true; activeMenu = 'courses'"
     >Guitar Courses</a>
 
         <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Backing Tracks</a>
@@ -80,7 +85,7 @@ onUnmounted(() => {
 
       <!-- Mega menu sits here so it spans full width -->
       <Transition name="fade">
-    <MegaMenu v-if="menuOpen" />
+    <MegaMenu v-if="menuOpen" :type="activeMenu" />
     </Transition>
     </div>
 
