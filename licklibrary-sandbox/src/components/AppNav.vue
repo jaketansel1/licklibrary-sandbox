@@ -40,7 +40,7 @@ onUnmounted(() => {
         <img src="/logo.svg" alt="LickLibrary" class="h-7" />
       </RouterLink>
       <div class="flex items-center gap-4">
-        <button class="text-white text-sm font-bold px-8 py-3.5 rounded uppercase tracking-wide" style="background: linear-gradient(180deg, #2B7FE0 0%, #1660C0 100%)">
+        <button class="text-white text-sm font-bold px-5 py-3 rounded uppercase tracking-wide" style="background: linear-gradient(180deg, #2B7FE0 0%, #1660C0 100%)">
   Start Free Trial
 </button>
         <button class="text-white text-sm font-medium hover:text-gray-300 uppercase tracking-wide px-5 py-3 border border-white/20 hover:border-white/50 rounded transition flex items-center gap-2">
@@ -79,9 +79,13 @@ onUnmounted(() => {
         <RouterLink to="/learning-paths" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Learning Paths</RouterLink>
         <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Blog</a>
       </div>
-      <div class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest cursor-pointer">
-        Search
-      </div>
+      <div class="flex items-center gap-2 text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest cursor-pointer">
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8"/>
+    <path d="m21 21-4.35-4.35"/>
+  </svg>
+  Search
+</div>
 
       <!-- Mega menu sits here so it spans full width -->
       <Transition name="fade">
