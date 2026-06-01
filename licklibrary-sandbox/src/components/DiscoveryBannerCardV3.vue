@@ -43,7 +43,7 @@ const {
       "
     >
       <div
-        class="relative rounded-2xl p-12"
+        class="relative rounded-2xl p-6 lg:p-12"
         style="
           background: rgba(12,12,14,0.88);
           backdrop-filter: blur(2px);
