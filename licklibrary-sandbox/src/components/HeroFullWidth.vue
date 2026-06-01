@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import DiscoveryBannerCard from '../components/DiscoveryBannerCard.vue'
 import DiscoveryBannerLight from '../components/DiscoveryBannerLight.vue'
 import DiscoveryBannerCardV2 from '../components/DiscoveryBannerCardV2.vue'
@@ -8,6 +8,16 @@ import { useDiscovery } from '../composables/useDiscovery.js'
 
 
 const { isEngaged } = useDiscovery()
+
+const bannerRef = ref(null)
+
+watch(isEngaged, (val) => {
+  if (val) {
+    setTimeout(() => {
+      bannerRef.value?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }, 300)
+  }
+})
 
 // Switch banner version: 'card', 'light', 'card-v2', 'card-v3'
 const bannerVersion = 'card-v3'
@@ -47,7 +57,7 @@ onUnmounted(() => {
     <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-black/10"></div>
 
     <!-- Bottom fade to page background -->
-    <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#0a0a0a]"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#0a0a0a]" style="z-index: 13"></div>
 
     <!-- Card scrim -->
     <div class="absolute bottom-0 left-0 right-0 h-64 pointer-events-none"
@@ -96,7 +106,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Banner: outside content div, higher z-index than overlay -->
-    <div class="relative max-w-[1320px] mx-auto w-full px-12 pb-10" style="z-index: 20">
+    <div ref="bannerRef" class="relative max-w-[1320px] mx-auto w-full px-12 pb-10" style="z-index: 20">
       <DiscoveryBannerCard v-if="bannerVersion === 'card'" />
       <DiscoveryBannerLight v-else-if="bannerVersion === 'light'" />
       <DiscoveryBannerCardV2 v-else-if="bannerVersion === 'card-v2'" />

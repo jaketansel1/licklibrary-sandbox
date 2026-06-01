@@ -23,13 +23,7 @@ const {
 
 const cardRef = ref(null)
 
-watch(isEngaged, (val) => {
-  if (val) {
-    setTimeout(() => {
-      cardRef.value?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-    }, 100)
-  }
-})
+
 </script>
 
 <template>
