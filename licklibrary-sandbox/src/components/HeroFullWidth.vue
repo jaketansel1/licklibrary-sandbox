@@ -61,14 +61,14 @@ onUnmounted(() => {
         Est. 1992
       </p>
 
-      <h1 class="opacity-0 animate-fadein text-6xl 2xl:text-7xl font-heavy leading-none mb-6 2xl:mb-6"
+      <h1 class="opacity-0 animate-fadein text-6xl 2xl:text-7xl font-heavy leading-none mb-4 2xl:mb-6"
         style="animation-delay: 300ms">
         Play More Guitar.<br>
         <span class="text-brand">Stay Inspired.</span>
       </h1>
 
       <p class="opacity-0 animate-fadein text-white/60 text-base leading-relaxed"
-        :class="bannerVersion === 'card-v3' ? 'mb-4' : 'mb-12'"
+        :class="bannerVersion === 'card-v3' ? 'mb-2' : 'mb-12'"
         style="animation-delay: 500ms">
         Learn from world-class tutors. 10,000+ lessons.<br>
 Free 1-to-1 coaching.

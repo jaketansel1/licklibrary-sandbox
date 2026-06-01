@@ -40,7 +40,7 @@ onUnmounted(() => {
         <img src="/logo.svg" alt="LickLibrary" class="h-7" />
       </RouterLink>
       <div class="flex items-center gap-4">
-        <button class="text-white text-sm font-bold px-5 py-3 rounded uppercase tracking-wide" style="background: linear-gradient(180deg, #2B7FE0 0%, #1660C0 100%)">
+        <button class="text-white text-sm font-bold px-8 py-3.5 rounded uppercase tracking-wide" style="background: linear-gradient(180deg, #2B7FE0 0%, #1660C0 100%)">
   Start Free Trial
 </button>
         <button class="text-white text-sm font-medium hover:text-gray-300 uppercase tracking-wide px-5 py-3 border border-white/20 hover:border-white/50 rounded transition flex items-center gap-2">
