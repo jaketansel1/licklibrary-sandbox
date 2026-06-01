@@ -106,7 +106,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Banner: outside content div, higher z-index than overlay -->
-    <div ref="bannerRef" class="relative max-w-[1320px] mx-auto w-full px-12 pb-10" style="z-index: 20">
+    <div ref="bannerRef" class="relative max-w-[1320px] mx-auto w-full px-12 pb-16 lg:pb-24" style="z-index: 20">
       <DiscoveryBannerCard v-if="bannerVersion === 'card'" />
       <DiscoveryBannerLight v-else-if="bannerVersion === 'light'" />
       <DiscoveryBannerCardV2 v-else-if="bannerVersion === 'card-v2'" />
