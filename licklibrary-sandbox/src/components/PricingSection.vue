@@ -115,7 +115,7 @@ const isAnnual = ref(true)
         :key="feature.text"
         class="flex items-center gap-1.5 text-white/60 text-xs"
       >
-        <span class="text-brand font-bold">{{ feature.icon }}</span>
+        <span>{{ feature.icon }}</span>
         {{ feature.text }}
       </div>
     </div>
