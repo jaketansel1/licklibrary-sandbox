@@ -14,6 +14,7 @@ import BackingTracksSection from '../components/BackingTracksSection.vue'
 import TutorsSection from '../components/TutorsSection.vue'
 import FooterSection from '../components/FooterSection.vue'
 import BackingTracksSlider from '../components/BackingTracksSlider.vue'
+import PricingSection from '../components/PricingSection.vue'
 </script>
 
 <template>
@@ -23,6 +24,7 @@ import BackingTracksSlider from '../components/BackingTracksSlider.vue'
 
     <div class="max-w-[1320px] mx-auto px-6">
       <WhySection />
+      <PricingSection variant="early" />
     </div>
 
     <VideoSection />
@@ -49,6 +51,7 @@ import BackingTracksSlider from '../components/BackingTracksSlider.vue'
       <TutorsSection />
     </div>
 
+    <PricingSection variant="late" />
     <FooterSection />
   </div>
 </template>
