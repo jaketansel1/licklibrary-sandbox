@@ -7,6 +7,7 @@ import DiscoveryBannerCardV3 from '../components/DiscoveryBannerCardV3.vue'
 
 // Switch banner version: 'card', 'light', 'card-v2', 'card-v3'
 const bannerVersion = 'card-v3'
+const heroVersion = ref('with-cta')
 
 const images = ['/hero.png', '/hero2.png']
 const activeImage = ref(0)
@@ -72,8 +73,9 @@ onUnmounted(() => {
         Learn from world-class tutors. 10,000+ lessons. Free 1-to-1 coaching.
       </p>
 
+    <!-- 'with-cta' or 'no-cta' -->
       <button
-        v-if="bannerVersion === 'card-v3'"
+  v-if="heroVersion === 'no-cta'"
         class="opacity-0 animate-fadein self-start text-white text-base font-semibold px-12 py-5 transition mb-8"
         style="animation-delay: 650ms; background: linear-gradient(180deg, #2B7FE0 0%, #1660C0 100%); box-shadow: 0 0 24px rgba(26,111,212,0.35), inset 0 1px 0 rgba(255,255,255,0.15); border-radius: 6px;"
       >

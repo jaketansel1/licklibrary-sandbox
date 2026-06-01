@@ -35,14 +35,14 @@ onUnmounted(() => {
   ]"
   >
     <!-- Upper nav -->
-    <div class="flex items-center justify-between px-12 py-3">
+    <div class="flex items-center justify-between px-12 py-4">
       <RouterLink to="/">
         <img src="/logo.svg" alt="LickLibrary" class="h-7" />
       </RouterLink>
       <div class="flex items-center gap-4">
-        <button class="bg-[#FF9911] hover:bg-[#e88a0f] text-[#09090A] text-sm font-bold px-5 py-3 rounded uppercase tracking-wide">
-          JOIN NOW
-        </button>
+        <button class="text-white text-sm font-bold px-5 py-3 rounded uppercase tracking-wide" style="background: linear-gradient(180deg, #2B7FE0 0%, #1660C0 100%)">
+  Start Free Trial
+</button>
         <button class="text-white text-sm font-medium hover:text-gray-300 uppercase tracking-wide px-5 py-3 border border-white/20 hover:border-white/50 rounded transition flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="8" r="4"/>
