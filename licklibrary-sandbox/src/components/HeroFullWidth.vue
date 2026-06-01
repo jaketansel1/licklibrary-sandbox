@@ -25,7 +25,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="relative flex flex-col w-full min-h-screen">
+  <section class="relative flex flex-col w-full" style="min-height: 100dvh">
 
     <!-- Background image -->
     <img
@@ -51,7 +51,7 @@ onUnmounted(() => {
 
     <!-- Content -->
     <div
-  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-24 lg:pt-48 pb-12 lg:pb-20"
+  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col justify-between pt-24 pb-10"
   :class="(bannerVersion === 'bottom-dock' || bannerVersion === 'card-v2') ? 'justify-start pt-48 2xl:pt-64' : 'justify-start'"
 >
 
