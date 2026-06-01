@@ -51,11 +51,11 @@ onUnmounted(() => {
 
     <!-- Content -->
     <div
-  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-24 lg:pt-36 pb-10"
+  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-24 lg:pt-58 pb-10"
   :class="(bannerVersion === 'bottom-dock' || bannerVersion === 'card-v2') ? 'justify-start pt-48 2xl:pt-64' : 'justify-start'"
 >
 
-      <p class="opacity-0 animate-fadein text-brand text-xs tracking-widest uppercase mb-5"
+      <p class="opacity-0 animate-fadein text-brand text-xs tracking-widest uppercase mb-2"
         style="animation-delay: 200ms">
         Est. 1992
       </p>
@@ -69,8 +69,7 @@ onUnmounted(() => {
       <p class="opacity-0 animate-fadein text-white/60 text-base leading-relaxed"
         :class="bannerVersion === 'card-v3' ? 'mb-10' : 'mb-12'"
         style="animation-delay: 500ms">
-        Learn from world-class tutors. 10,000+ lessons.<br>
-        Free 1-to-1 coaching.
+        Learn from world-class tutors. 10,000+ lessons. Free 1-to-1 coaching.
       </p>
 
       <button
