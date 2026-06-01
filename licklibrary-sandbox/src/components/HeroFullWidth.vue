@@ -51,7 +51,7 @@ onUnmounted(() => {
 
     <!-- Content -->
     <div
-  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-24 lg:pt-58 pb-10"
+  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-16 lg:pt-58 pb-10"
   :class="(bannerVersion === 'bottom-dock' || bannerVersion === 'card-v2') ? 'justify-start pt-48 2xl:pt-64' : 'justify-start'"
 >
 
