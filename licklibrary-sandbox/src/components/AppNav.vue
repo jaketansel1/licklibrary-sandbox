@@ -35,7 +35,7 @@ onUnmounted(() => {
   ]"
   >
     <!-- Upper nav -->
-    <div class="flex items-center justify-between px-12 py-4">
+    <div class="flex items-center justify-between px-12 py-3">
       <RouterLink to="/">
         <img src="/logo.svg" alt="LickLibrary" class="h-7" />
       </RouterLink>
@@ -55,7 +55,7 @@ onUnmounted(() => {
 
     <!-- Lower nav -->
     <div
-  class="relative flex items-center justify-between px-12 py-4"
+  class="relative flex items-center justify-between px-12 py-3"
   :class="transparent && !menuOpen ? '' : 'bg-[#262626]'"
   @mouseleave="menuOpen = false"
 >
