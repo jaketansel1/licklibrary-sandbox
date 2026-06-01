@@ -4,10 +4,14 @@ import DiscoveryBannerCard from '../components/DiscoveryBannerCard.vue'
 import DiscoveryBannerLight from '../components/DiscoveryBannerLight.vue'
 import DiscoveryBannerCardV2 from '../components/DiscoveryBannerCardV2.vue'
 import DiscoveryBannerCardV3 from '../components/DiscoveryBannerCardV3.vue'
+import { useDiscovery } from '../composables/useDiscovery.js'
+
+
+const { isEngaged } = useDiscovery()
 
 // Switch banner version: 'card', 'light', 'card-v2', 'card-v3'
 const bannerVersion = 'card-v3'
-const heroVersion = ref('with-cta')
+const heroVersion = ref('no-cta')
 
 const images = ['/hero.png', '/hero2.png']
 const activeImage = ref(0)
@@ -50,12 +54,20 @@ onUnmounted(() => {
       style="background: linear-gradient(to top, rgba(8,8,8,0.92) 0%, transparent 100%)">
     </div>
 
-    <!-- Content -->
-    <div
-  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-48 2xl:pt-58 pb-10"
-  :class="(bannerVersion === 'bottom-dock' || bannerVersion === 'card-v2') ? 'justify-start pt-48 2xl:pt-64' : 'justify-start'"
->
+    <!-- Engagement dim overlay -->
+    <Transition name="fade">
+      <div
+        v-if="isEngaged"
+        class="absolute inset-0 pointer-events-none"
+        style="z-index: 12; background: rgba(0,0,0,0.6)"
+      ></div>
+    </Transition>
 
+    <!-- Content: headline + subtitle only -->
+    <div
+      class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-48 2xl:pt-58"
+      :class="(bannerVersion === 'bottom-dock' || bannerVersion === 'card-v2') ? 'justify-start pt-48 2xl:pt-64' : 'justify-start'"
+    >
       <p class="opacity-0 animate-fadein text-brand text-xs tracking-widest uppercase mb-2"
         style="animation-delay: 200ms">
         Est. 1992
@@ -68,33 +80,43 @@ onUnmounted(() => {
       </h1>
 
       <p class="opacity-0 animate-fadein text-white/60 text-base leading-relaxed"
-        :class="bannerVersion === 'card-v3' ? 'mb-2' : 'mb-12'"
+        :class="bannerVersion === 'card-v3' ? 'mb-4' : 'mb-12'"
         style="animation-delay: 500ms">
         Learn from world-class tutors. 10,000+ lessons.<br>
-Free 1-to-1 coaching.
+        Free 1-to-1 coaching.
       </p>
 
-    <!-- 'with-cta' or 'no-cta' -->
       <button
-  v-if="heroVersion === 'no-cta'"
+        v-if="heroVersion === 'with-cta'"
         class="opacity-0 animate-fadein self-start text-white text-base font-semibold px-12 py-5 transition mb-8"
         style="animation-delay: 650ms; background: linear-gradient(180deg, #2B7FE0 0%, #1660C0 100%); box-shadow: 0 0 24px rgba(26,111,212,0.35), inset 0 1px 0 rgba(255,255,255,0.15); border-radius: 6px;"
       >
         Start Your 14 Day FREE Trial →
       </button>
+    </div>
 
-      
-
+    <!-- Banner: outside content div, higher z-index than overlay -->
+    <div class="relative max-w-[1320px] mx-auto w-full px-12 pb-10" style="z-index: 20">
       <DiscoveryBannerCard v-if="bannerVersion === 'card'" />
       <DiscoveryBannerLight v-else-if="bannerVersion === 'light'" />
       <DiscoveryBannerCardV2 v-else-if="bannerVersion === 'card-v2'" />
       <DiscoveryBannerCardV3
-  v-else-if="bannerVersion === 'card-v3'"
-  class="opacity-0 animate-fadein mt-4"
-  style="animation-delay: 1000ms"
-/>
-
+        v-else-if="bannerVersion === 'card-v3'"
+        class="opacity-0 animate-fadein mt-4"
+        style="animation-delay: 1000ms"
+      />
     </div>
 
   </section>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

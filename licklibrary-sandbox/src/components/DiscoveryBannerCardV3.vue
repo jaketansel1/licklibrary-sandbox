@@ -1,7 +1,9 @@
 <script setup>
+import { ref, watch } from 'vue'
 import { useDiscovery } from '../composables/useDiscovery.js'
 
 const {
+  isEngaged,
   currentStep,
   totalSteps,
   currentStepName,
@@ -18,10 +20,20 @@ const {
   stepTitle,
   stepSubtitle
 } = useDiscovery()
+
+const cardRef = ref(null)
+
+watch(isEngaged, (val) => {
+  if (val) {
+    setTimeout(() => {
+      cardRef.value?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }, 100)
+  }
+})
 </script>
 
 <template>
-  <div class="relative shrink-0">
+  <div class="relative shrink-0" style="z-index: 20">
 
     <!-- Ambient glow -->
     <div
@@ -31,8 +43,9 @@ const {
 
     <!-- Glass card border wrapper -->
     <div
-      class="relative max-w-4xl rounded-2xl p-[1px] overflow-hidden"
-      style="
+      class="relative rounded-2xl p-[1px] overflow-hidden"
+style="
+  max-width: 820px;
         background: linear-gradient(135deg,
           rgba(238,114,103,0.75) 0%,
           rgba(255,255,255,0.22) 20%,
@@ -43,7 +56,7 @@ const {
       "
     >
       <div
-        class="relative rounded-2xl p-6 lg:p-12"
+        class="relative rounded-2xl p-12"
         style="
           background: rgba(12,12,14,0.88);
           backdrop-filter: blur(2px);
@@ -252,5 +265,17 @@ const {
       </div>
     </div>
 
+
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

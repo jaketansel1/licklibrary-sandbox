@@ -1,5 +1,7 @@
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+
+const isEngaged = ref(false)
 
 export function useDiscovery() {
   const router = useRouter()
@@ -14,6 +16,22 @@ export function useDiscovery() {
     time: null,
     artists: ''
   })
+
+  onMounted(() => {
+    isEngaged.value = false
+    currentStep.value = 1
+    answers.value = {
+      goal: null,
+      level: null,
+      genres: [],
+      techniques: [],
+      inspiration: null,
+      time: null,
+      artists: ''
+    }
+  })
+
+  // ... rest of your code
 
   // ─── STEP MAPS PER GOAL ───────────────────────────────────────────
   // Each goal has its own sequence of step "names"
@@ -64,6 +82,7 @@ export function useDiscovery() {
   // ─── ANSWER SELECTION ─────────────────────────────────────────────
   function selectAnswer(key, value) {
   answers.value[key] = value
+  isEngaged.value = true
   const map = stepMaps[answers.value.goal ?? 'learn-songs']
   const isLastStep = currentStep.value >= map.length
   if (isLastStep) {
@@ -74,12 +93,14 @@ export function useDiscovery() {
 }
 
   function toggleGenre(genre) {
+    isEngaged.value = true
     const genres = answers.value.genres
     const i = genres.indexOf(genre)
     i === -1 ? genres.push(genre) : genres.splice(i, 1)
   }
 
   function toggleTechnique(technique) {
+    isEngaged.value = true
     const techniques = answers.value.techniques
     const i = techniques.indexOf(technique)
     i === -1 ? techniques.push(technique) : techniques.splice(i, 1)
@@ -155,6 +176,7 @@ export function useDiscovery() {
   })
 
   return {
+    isEngaged,
     currentStep,
     totalSteps,
     currentStepName,
