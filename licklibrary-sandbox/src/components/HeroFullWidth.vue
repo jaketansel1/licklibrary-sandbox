@@ -51,10 +51,9 @@ onUnmounted(() => {
 
     <!-- Content -->
     <div
-      class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-32"
-      :class="(bannerVersion === 'bottom-dock' || bannerVersion === 'card-v2') ? 'justify-start pt-48 2xl:pt-64' : 'justify-center'"
-      style="height: 100vh"
-    >
+  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-48 pb-20"
+  :class="(bannerVersion === 'bottom-dock' || bannerVersion === 'card-v2') ? 'justify-start pt-48 2xl:pt-64' : 'justify-start'"
+>
 
       <p class="opacity-0 animate-fadein text-brand text-xs tracking-widest uppercase mb-5"
         style="animation-delay: 200ms">
@@ -68,7 +67,7 @@ onUnmounted(() => {
       </h1>
 
       <p class="opacity-0 animate-fadein text-white/60 text-base leading-relaxed"
-        :class="bannerVersion === 'card-v3' ? 'mb-6' : 'mb-12'"
+        :class="bannerVersion === 'card-v3' ? 'mb-10' : 'mb-12'"
         style="animation-delay: 500ms">
         Learn from world-class tutors. 10,000+ lessons.<br>
         Free 1-to-1 coaching.

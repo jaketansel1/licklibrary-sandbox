@@ -9,27 +9,93 @@ export function useDiscovery() {
     goal: null,
     level: null,
     genres: [],
+    techniques: [],
+    inspiration: null,
     time: null,
     artists: ''
   })
 
+  // ─── STEP MAPS PER GOAL ───────────────────────────────────────────
+  // Each goal has its own sequence of step "names"
+  // We use these names in the template to decide what to render
+  const stepMaps = {
+  'learn-songs':  ['goal', 'genres', 'time', 'artists'],
+  'improve':      ['goal', 'level', 'techniques', 'time', 'artists'],
+  'get-inspired': ['goal', 'inspiration', 'time', 'artists'],
+  'get-started':  ['goal', 'level', 'techniques', 'time', 'artists'],
+}
+
+  // What's the current step "name"?
+  // e.g. if goal is 'learn-songs' and we're on step 2, the name is 'genres'
+  const currentStepName = computed(() => {
+    const goal = answers.value.goal
+    if (!goal) return 'goal'
+    const map = stepMaps[goal]
+    return map[currentStep.value - 1] ?? 'time'
+  })
+
+  // Total steps for the chosen goal (drives the x/y counter)
+  const totalSteps = computed(() => {
+    const goal = answers.value.goal
+    if (!goal) return 4 // default before anything is selected
+    return stepMaps[goal].length
+  })
+
+  // ─── TECHNIQUES PER LEVEL ─────────────────────────────────────────
+  const techniqueOptions = computed(() => {
+    const level = answers.value.level
+    if (level === 'beginner') return [
+      'Lead Guitar', 'Rhythm Guitar', 'Chords',
+      'Understand the Fretboard', 'Simple Solos', 'Easy Licks'
+    ]
+    if (level === 'intermediate' || level === 'advanced') return [
+  'Speed and Accuracy', 'Picking Techniques', 'Guitar Workouts',
+  'Blues', 'Metal', 'Rhythm Guitar', 'Practice Routines',
+  'Improvisation', 'Understand the Fretboard', 'Harmony and Theory',
+  'Something Else', 'Inspire Me'
+]
+    // 'not-sure' — show a broad starter list
+    return [
+      'Lead Guitar', 'Rhythm Guitar', 'Chords', 'Blues',
+      'Practice Routines', 'Understand the Fretboard'
+    ]
+  })
+
+  // ─── ANSWER SELECTION ─────────────────────────────────────────────
   function selectAnswer(key, value) {
-    answers.value[key] = value
+  answers.value[key] = value
+  const map = stepMaps[answers.value.goal ?? 'learn-songs']
+  const isLastStep = currentStep.value >= map.length
+  if (isLastStep) {
+    showResults()
+  } else {
     currentStep.value++
   }
+}
 
   function toggleGenre(genre) {
     const genres = answers.value.genres
-    const index = genres.indexOf(genre)
-    if (index === -1) {
-      genres.push(genre)
-    } else {
-      genres.splice(index, 1)
-    }
+    const i = genres.indexOf(genre)
+    i === -1 ? genres.push(genre) : genres.splice(i, 1)
   }
 
-  function isSelected(genre) {
+  function toggleTechnique(technique) {
+    const techniques = answers.value.techniques
+    const i = techniques.indexOf(technique)
+    i === -1 ? techniques.push(technique) : techniques.splice(i, 1)
+  }
+
+  function isGenreSelected(genre) {
     return answers.value.genres.includes(genre)
+  }
+
+  function isTechniqueSelected(technique) {
+    return answers.value.techniques.includes(technique)
+  }
+
+  // Kept for backwards compat — template uses isGenreSelected now
+  function isSelected(item) {
+    return answers.value.genres.includes(item)
   }
 
   function nextStep() {
@@ -47,34 +113,59 @@ export function useDiscovery() {
         goal: answers.value.goal,
         level: answers.value.level,
         genres: answers.value.genres.join(','),
+        techniques: answers.value.techniques.join(','),
+        inspiration: answers.value.inspiration,
         time: answers.value.time,
         artists: answers.value.artists
       }
     })
   }
 
-  const stepTitle = computed(() => ({
-    1: 'What brings you here today?',
-    2: 'How would you describe your playing?',
-    3: 'What genres do you like?',
-    4: 'How much time can you give it?',
-    5: 'Any artists or songs you love?'
-  }[currentStep.value]))
+  // ─── STEP TITLES ──────────────────────────────────────────────────
+  const stepTitle = computed(() => {
+    const name = currentStepName.value
+    const level = answers.value.level
 
-  const stepSubtitle = computed(() => ({
-    1: "We'll find the right lessons for where you are right now",
-    2: '',
-    3: '',
-    4: '',
-    5: 'Optional · helps us personalise your recommendations'
-  }[currentStep.value]))
+    const titles = {
+      goal:         'What brings you here today?',
+      genres:       'What kind of music do you love?',
+      artists:      'Any artists or songs you like?',
+      time:         'How much time can you give it?',
+      level:        'How would you describe your playing?',
+      techniques:   level === 'beginner'
+                      ? 'What would you like to learn first?'
+                      : 'What do you want to work on?',
+      inspiration:  'What would help you most right now?',
+    }
+    return titles[name] ?? ''
+  })
+
+  const stepSubtitle = computed(() => {
+    const name = currentStepName.value
+    const subtitles = {
+      goal:        "We'll find the right lessons for where you are right now",
+      artists:     'Optional · helps us personalise your recommendations',
+      techniques:  'Pick as many as you like',
+      genres:      'Pick as many as you like',
+      inspiration: '',
+      level:       '',
+      time:        '',
+    }
+    return subtitles[name] ?? ''
+  })
 
   return {
     currentStep,
+    totalSteps,
+    currentStepName,
     answers,
+    techniqueOptions,
     selectAnswer,
     toggleGenre,
+    toggleTechnique,
     isSelected,
+    isGenreSelected,
+    isTechniqueSelected,
     nextStep,
     goBack,
     showResults,
