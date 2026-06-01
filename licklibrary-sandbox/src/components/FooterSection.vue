@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-black text-white pt-16 pb-8 px-8">
+  <footer class="bg-black text-white pt-16 mt-12 pb-8 px-8">
 
     <!-- Top section: links + social -->
     <div class="max-w-[1320px] mx-auto">
