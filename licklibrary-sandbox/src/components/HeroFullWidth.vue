@@ -51,7 +51,7 @@ onUnmounted(() => {
 
     <!-- Content -->
     <div
-  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-16 xl:pt-58 pb-10"
+  class="relative z-10 max-w-[1320px] mx-auto w-full px-12 flex flex-col pt-28 2xl:pt-58 pb-10"
   :class="(bannerVersion === 'bottom-dock' || bannerVersion === 'card-v2') ? 'justify-start pt-48 2xl:pt-64' : 'justify-start'"
 >
 
@@ -60,7 +60,7 @@ onUnmounted(() => {
         Est. 1992
       </p>
 
-      <h1 class="opacity-0 animate-fadein text-7xl font-heavy leading-none mb-4"
+      <h1 class="opacity-0 animate-fadein text-5xl 2xl:text-7xl font-heavy leading-none mb-4"
         style="animation-delay: 300ms">
         Play More Guitar.<br>
         <span class="text-brand">Stay Inspired.</span>
