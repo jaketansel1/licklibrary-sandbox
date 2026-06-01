@@ -124,8 +124,13 @@ export function useDiscovery() {
   }
 
   function goBack() {
-    if (currentStep.value > 1) currentStep.value--
+  if (currentStep.value > 1) {
+    currentStep.value--
+    if (currentStep.value === 1) {
+      isEngaged.value = false
+    }
   }
+}
 
   function showResults() {
     router.push({
