@@ -106,16 +106,16 @@ const isAnnual = ref(true)
     <div class="flex items-center justify-center gap-5 flex-wrap mb-8 max-w-3xl mx-auto">
       <div
         v-for="feature in [
-          { icon: '🎸', text: '10,000+ Lessons' },
-          { icon: '🎬', text: 'Free 1-to-1 Coaching' },
-          { icon: '🎵', text: '1,400+ Backing Tracks' },
-          { icon: '📅', text: 'New Content Weekly' },
-          { icon: '👥', text: 'Community Access' },
+          { icon: '✓', text: '10,000+ Lessons' },
+{ icon: '✓', text: 'Free 1-to-1 Coaching' },
+{ icon: '✓', text: '1,400+ Backing Tracks' },
+{ icon: '✓', text: 'New Content Weekly' },
+{ icon: '✓', text: 'Community Access' },
         ]"
         :key="feature.text"
         class="flex items-center gap-1.5 text-white/60 text-xs"
       >
-        <span>{{ feature.icon }}</span>
+        <span class="text-brand font-bold">{{ feature.icon }}</span>
         {{ feature.text }}
       </div>
     </div>
