@@ -60,7 +60,7 @@ onUnmounted(() => {
         Est. 1992
       </p>
 
-      <h1 class="opacity-0 animate-fadein text-5xl 2xl:text-7xl font-heavy leading-none mb-6"
+      <h1 class="opacity-0 animate-fadein text-5xl 2xl:text-7xl font-heavy leading-none mb-8 2xl:mb-6"
         style="animation-delay: 300ms">
         Play More Guitar.<br>
         <span class="text-brand">Stay Inspired.</span>
@@ -74,7 +74,7 @@ onUnmounted(() => {
 
       <button
         v-if="bannerVersion === 'card-v3'"
-        class="opacity-0 animate-fadein self-start text-white text-base font-semibold px-12 py-5 transition mb-8 2xl:mb-0"
+        class="opacity-0 animate-fadein self-start text-white text-base font-semibold px-12 py-5 transition mb-8"
         style="animation-delay: 650ms; background: linear-gradient(180deg, #2B7FE0 0%, #1660C0 100%); box-shadow: 0 0 24px rgba(26,111,212,0.35), inset 0 1px 0 rgba(255,255,255,0.15); border-radius: 6px;"
       >
         Start Your 14 Day FREE Trial →
