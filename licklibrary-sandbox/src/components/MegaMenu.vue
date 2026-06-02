@@ -2,7 +2,7 @@
   <div class="absolute top-full left-0 w-full bg-[#1a1a1a] border-t border-white/10 z-50">
 
     <!-- ===================== TAB BAR ===================== -->
-    <div class="flex items-center gap-10 px-12 border-b border-white/10">
+<div v-if="type !== 'tutors'" class="flex items-center gap-10 px-12 border-b border-white/10">
       <button
         v-for="tab in tabs"
         :key="tab"
@@ -87,7 +87,7 @@
         class="flex-1 group cursor-pointer"
         :class="index === 1 ? 'hidden 2xl:block' : ''"
 >
-              <div class="rounded-lg overflow-hidden mb-3 relative">
+              <div class="overflow-hidden mb-3 relative">
                 <img :src="item.image" :alt="item.title" class="w-full aspect-[16/9]  object-cover group-hover:scale-105 transition duration-500" />
                 <span
                   class="absolute top-2 left-2 text-xs font-semibold uppercase tracking-wide px-2 py-1 rounded"
@@ -159,7 +159,7 @@
               :key="tutor.name"
               class="flex-1 group cursor-pointer"
             >
-              <div class="rounded-lg overflow-hidden mb-3">
+              <div class="overflow-hidden mb-3">
                 <img :src="tutor.image" :alt="tutor.name" class="w-full aspect-square object-cover object-top group-hover:scale-105 transition duration-500" />
               </div>
               <p class="text-white text-sm font-semibold">{{ tutor.name }}</p>
@@ -207,7 +207,7 @@
                 <p class="text-brand text-xs uppercase tracking-widest mb-4">{{ genre.name }}</p>
                 <div class="flex flex-col gap-3">
                   <div v-for="lesson in genre.lessons" :key="lesson.title" class="group cursor-pointer">
-                    <div class="rounded-lg overflow-hidden mb-2">
+                    <div class="overflow-hidden mb-2">
                       <img :src="lesson.image" :alt="lesson.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
                     </div>
                     <p class="text-white text-xs font-semibold leading-snug">{{ lesson.title }}</p>
@@ -230,7 +230,7 @@
   class="group cursor-pointer"
   :class="index >= 5 ? 'min-[1800px]:hidden' : ''"
 >
-              <div class="rounded-lg overflow-hidden mb-2">
+              <div class="overflow-hidden mb-2">
                 <img :src="item.image" :alt="item.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
               </div>
               <p class="text-white text-xs font-semibold leading-snug">{{ item.title }}</p>
@@ -277,7 +277,7 @@
             class="w-42 shrink-0 cursor-pointer group"
             :class="index === 5 ? 'hidden 2xl:block' : ''"
           >
-            <div class="rounded-lg overflow-hidden mb-3">
+            <div class="overflow-hidden mb-3">
               <img :src="course.image" :alt="course.title" class="w-full aspect-[2/3] max-h-64 object-cover group-hover:scale-105 transition duration-500" />
             </div>
             <p class="text-white text-xs font-semibold leading-snug">{{ course.title }}</p>
@@ -292,7 +292,7 @@
             :key="course.title"
             class="flex-1 cursor-pointer group"
           >
-            <div class="rounded-lg overflow-hidden mb-3">
+            <div class="overflow-hidden mb-3">
               <img :src="course.image" :alt="course.title" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500" />
             </div>
             <p class="text-white text-sm font-semibold leading-snug mb-1">{{ course.title }}</p>
@@ -449,6 +449,136 @@
 
 </div>
 
+<!-- ===================== LEARNING PATHS MENU ===================== -->
+<div v-else-if="type === 'learning-paths'">
+
+  <!-- FEATURED tab -->
+  <div v-if="activeTab === 'Featured'" class="flex px-12 py-8 gap-10">
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
+      <ul class="space-y-3">
+        <li v-for="link in learningPathsTab.browseLinks" :key="link">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured Paths</p>
+      <div class="flex gap-6">
+        <div
+          v-for="path in learningPathsTab.featured"
+          :key="path.title"
+          class="flex-1 group cursor-pointer"
+        >
+          <div class="overflow-hidden mb-3">
+            <img :src="path.image" :alt="path.title" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500" />
+          </div>
+          <p class="text-white text-sm font-semibold leading-snug mb-1">{{ path.title }}</p>
+          <p class="text-white/40 text-xs">{{ path.tutor }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BY LEVEL tab -->
+  <div v-else-if="activeTab === 'By Level'" class="flex px-12 py-8 gap-10">
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Level</p>
+      <ul class="space-y-3">
+        <li v-for="level in learningPathsTab.levels" :key="level">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ level }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured Paths</p>
+      <div class="flex gap-6">
+        <div
+          v-for="path in learningPathsTab.featured"
+          :key="path.title"
+          class="flex-1 group cursor-pointer"
+        >
+          <div class="overflow-hidden mb-3">
+            <img :src="path.image" :alt="path.title" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500" />
+          </div>
+          <span class="inline-block text-xs font-semibold uppercase tracking-wide px-2 py-1 bg-white/10 text-white/60 mb-2">{{ path.level }}</span>
+          <p class="text-white text-sm font-semibold leading-snug mb-1">{{ path.title }}</p>
+          <p class="text-white/40 text-xs">{{ path.tutor }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BY STYLE tab -->
+  <div v-else class="flex px-12 py-8 gap-10">
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Style</p>
+      <ul class="space-y-3">
+        <li v-for="style in learningPathsTab.styles" :key="style">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ style }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured Paths</p>
+      <div class="flex gap-6">
+        <div
+          v-for="path in learningPathsTab.featured"
+          :key="path.title"
+          class="flex-1 group cursor-pointer"
+        >
+          <div class="overflow-hidden mb-3">
+            <img :src="path.image" :alt="path.title" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500" />
+          </div>
+          <p class="text-white text-sm font-semibold leading-snug mb-1">{{ path.title }}</p>
+          <p class="text-white/40 text-xs">{{ path.tutor }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== TUTORS MENU ===================== -->
+<div v-else-if="type === 'tutors'">
+
+  <!-- FEATURED tab -->
+  <div class="flex px-12 py-8 gap-10">
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
+      <ul class="space-y-3">
+        <li v-for="link in tutorsMenuTab.browseLinks" :key="link">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured Tutors</p>
+      <div class="flex gap-6">
+        
+
+ 
+        <div
+          v-for="tutor in tutorsMenuTab.featured"
+          :key="tutor.name"
+          class="flex-1 group cursor-pointer"
+        >
+          <div class="overflow-hidden mb-3">
+            <img :src="tutor.image" :alt="tutor.name" class="w-full aspect-video object-cover object-top group-hover:scale-105 transition duration-500" />
+          </div>
+          <p class="text-white text-sm font-semibold mb-1">{{ tutor.name }}</p>
+          <p class="text-white/40 text-xs">{{ tutor.genre }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
   </div>
 </template>
 
@@ -465,10 +595,13 @@ const props = defineProps({
 const lessonsTabs = ['Featured', 'New', 'Song Lessons', 'Genre', 'Artists', 'Tutors', 'Most Watched']
 const coursesTabs = ['New', 'Classic Albums', 'Technique', 'Song Courses', 'Beginners', 'Learning Paths', 'Licks', 'Most Watched']
 const backingTracksTabs = ['Featured', 'Genres', 'Jam Tracks', 'Song Tracks', 'Video Jams', 'New']
+const learningPathsTabs = ['Featured', 'By Level', 'By Style']
 
 const tabs = computed(() => {
   if (props.type === 'lessons') return lessonsTabs
   if (props.type === 'backing-tracks') return backingTracksTabs
+  if (props.type === 'learning-paths') return learningPathsTabs
+  if (props.type === 'tutors') return tutorsTabs
   return coursesTabs
 })
 
@@ -622,6 +755,31 @@ const backingTracksTab = {
     { title: 'Smoke on the Water', artist: 'Deep Purple', image: '/jam-tracks/hero-artist_Deep_Purple.jpg' },
     { title: 'Eagles Medley', artist: 'Eagles', image: '/jam-tracks/hero-artist_Eagles.jpg' },
     { title: 'Nothing Else Matters', artist: 'Metallica', image: '/jam-tracks/hero-artist_Metallica.jpg' },
+  ]
+}
+
+const learningPathsTab = {
+  browseLinks: ['All Learning Paths', 'Latest', 'Most Popular'],
+  levels: ['Beginner', 'Intermediate', 'Advanced'],
+  styles: ['Rock', 'Blues', 'Metal', 'Acoustic', 'Technique', 'Theory'],
+  featured: [
+    { title: '2 Week Scales Bootcamp', tutor: 'Sam Bell', level: 'Beginner', image: '/learning-paths/learningpath-1.jpg' },
+    { title: '2 Week Technique Builder', tutor: 'Sam Bell', level: 'Intermediate', image: '/learning-paths/learningpath-2.jpg' },
+    { title: '10 Classic Rock Songs in 10 Days', tutor: 'Rich Shaw', level: 'Beginner', image: '/learning-paths/learningpath-3.jpg' },
+  ]
+}
+
+const tutorsTabs = ['Featured']
+
+const tutorsMenuTab = {
+  browseLinks: ['All Tutors', 'Featured Tutors', 'New Tutors'],
+  genres: ['Rock', 'Blues', 'Metal', 'Acoustic', 'Fusion', 'Jazz', 'Beginner Friendly'],
+  featured: [
+    { name: 'Danny Gill', genre: 'Rock · Blues', image: '/tutors/hero-tutor_Danny_Gill.jpg' },
+    { name: 'Sam Bell', genre: 'Metal · Fusion', image: '/tutors/hero-tutor_Sam_Bell.jpg' },
+    { name: 'Dave Kilminster', genre: 'Rock · Progressive', image: '/tutors/hero-tutor_Dave_Kilminster.jpg' },
+    { name: 'Jamie Humphries', genre: 'Rock · Blues', image: '/tutors/hero-tutor_Jamie_Humphries.jpg' },
+    { name: 'Guthrie Govan', genre: 'Fusion · Rock', image: '/tutors/hero-tutor_Guthrie_Govan.jpg' },
   ]
 }
 
