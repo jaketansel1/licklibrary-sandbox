@@ -75,8 +75,13 @@ onUnmounted(() => {
      @mouseenter="menuOpen = true; activeMenu = 'courses'"
     >Guitar Courses</a>
 
-        <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Backing Tracks</a>
+        <a href="#"
+  class="text-sm font-medium uppercase tracking-widest transition duration-200"
+  :class="menuOpen && activeMenu === 'backing-tracks' ? 'text-brand' : 'text-white/90 hover:text-white'"
+  @mouseenter="menuOpen = true; activeMenu = 'backing-tracks'"
+>Backing Tracks</a>
         <RouterLink to="/learning-paths" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Learning Paths</RouterLink>
+        <RouterLink to="/tutors" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Tutors</RouterLink>
         <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Blog</a>
       </div>
       <div class="flex items-center gap-2 text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest cursor-pointer">

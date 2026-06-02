@@ -244,7 +244,7 @@
     </div>
 
     <!-- ===================== GUITAR COURSES MENU ===================== -->
-    <div v-else class="flex px-12 py-8 gap-10">
+    <div v-else-if="type === 'courses'" class="flex px-12 py-8 gap-10">
 
       <!-- Left: Browse + Genre -->
       <div class="w-40 shrink-0">
@@ -304,6 +304,151 @@
 
     </div>
 
+<!-- ===================== BACKING TRACKS MENU ===================== -->
+<div v-else-if="type === 'backing-tracks'">
+
+  <!-- FEATURED tab -->
+  <div v-if="activeTab === 'Featured'" class="flex px-12 py-8 gap-10">
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
+      <ul class="space-y-3 mb-8">
+        <li v-for="link in backingTracksTab.browseLinks" :key="link">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
+        </li>
+      </ul>
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Practice Goals</p>
+      <ul class="space-y-3">
+        <li v-for="goal in backingTracksTab.practiceGoals" :key="goal">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ goal }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured Tracks</p>
+      <div class="grid grid-cols-4 gap-4">
+        <div v-for="track in backingTracksTab.featured" :key="track.title" class="group cursor-pointer">
+          <div class="overflow-hidden mb-2">
+            <img :src="track.image" :alt="track.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
+          </div>
+          <p class="text-white text-xs font-semibold leading-snug">{{ track.title }}</p>
+          <p class="text-white/40 text-xs mt-0.5">{{ track.key }} · {{ track.style }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENRES tab -->
+  <div v-else-if="activeTab === 'Genres'" class="flex px-12 py-8 gap-10">
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">All Genres</p>
+      <ul class="space-y-3">
+        <li v-for="genre in backingTracksTab.genres" :key="genre">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ genre }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured</p>
+      <div class="grid grid-cols-4 gap-4">
+        <div v-for="track in backingTracksTab.featured" :key="track.title" class="group cursor-pointer">
+          <div class="overflow-hidden mb-2">
+            <img :src="track.image" :alt="track.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
+          </div>
+          <p class="text-white text-xs font-semibold">{{ track.title }}</p>
+          <p class="text-white/40 text-xs mt-0.5">{{ track.style }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAM TRACKS tab -->
+  <div v-else-if="activeTab === 'Jam Tracks'" class="flex px-12 py-8 gap-10">
+    <div class="w-36 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Keys</p>
+      <ul class="space-y-3 mb-8">
+        <li v-for="key in backingTracksTab.jamTracks.keys" :key="key">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ key }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="w-36 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Track Type</p>
+      <ul class="space-y-3">
+        <li v-for="type in backingTracksTab.jamTracks.types" :key="type">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ type }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured Jam Tracks</p>
+      <div class="flex gap-6">
+        <div v-for="track in backingTracksTab.jamTracks.featured" :key="track.title" class="flex-1 group cursor-pointer">
+          <div class="overflow-hidden mb-2">
+            <img :src="track.image" :alt="track.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
+          </div>
+          <p class="text-white text-sm font-semibold">{{ track.title }}</p>
+          <p class="text-white/40 text-xs mt-1">{{ track.key }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SONG TRACKS tab -->
+  <div v-else-if="activeTab === 'Song Tracks'" class="flex px-12 py-8 gap-10">
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
+      <ul class="space-y-3">
+        <li v-for="link in ['All Song Tracks', 'Classic Rock', 'Blues', 'Metal', 'Pop']" :key="link">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured Song Tracks</p>
+      <div class="grid grid-cols-4 gap-4">
+        <div v-for="track in backingTracksTab.songTracks" :key="track.title" class="group cursor-pointer">
+          <div class="overflow-hidden mb-2">
+            <img :src="track.image" :alt="track.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
+          </div>
+          <p class="text-white text-xs font-semibold">{{ track.title }}</p>
+          <p class="text-white/40 text-xs mt-0.5">{{ track.artist }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO JAMS + NEW tabs -->
+  <div v-else class="flex px-12 py-8 gap-10">
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
+      <ul class="space-y-3">
+        <li v-for="link in ['All Video Jams', 'Beginner', 'Intermediate', 'Advanced']" :key="link">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured</p>
+      <div class="grid grid-cols-4 gap-4">
+        <div v-for="track in backingTracksTab.featured" :key="track.title" class="group cursor-pointer">
+          <div class="overflow-hidden mb-2">
+            <img :src="track.image" :alt="track.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
+          </div>
+          <p class="text-white text-xs font-semibold">{{ track.title }}</p>
+          <p class="text-white/40 text-xs mt-0.5">{{ track.style }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
   </div>
 </template>
 
@@ -319,8 +464,13 @@ const props = defineProps({
 
 const lessonsTabs = ['Featured', 'New', 'Song Lessons', 'Genre', 'Artists', 'Tutors', 'Most Watched']
 const coursesTabs = ['New', 'Classic Albums', 'Technique', 'Song Courses', 'Beginners', 'Learning Paths', 'Licks', 'Most Watched']
+const backingTracksTabs = ['Featured', 'Genres', 'Jam Tracks', 'Song Tracks', 'Video Jams', 'New']
 
-const tabs = computed(() => props.type === 'lessons' ? lessonsTabs : coursesTabs)
+const tabs = computed(() => {
+  if (props.type === 'lessons') return lessonsTabs
+  if (props.type === 'backing-tracks') return backingTracksTabs
+  return coursesTabs
+})
 
 const activeTab = ref('New')
 
@@ -446,6 +596,33 @@ const tabContent = {
       { title: '10 Classic Rock Songs in 10 Days', tutor: 'Rich Shaw', image: '/learningpath-3.jpg' },
     ]
   }
+}
+
+const backingTracksTab = {
+  browseLinks: ['All Backing Tracks', 'Latest', 'Most Popular', 'Beginner Friendly'],
+  practiceGoals: ['Soloing', 'Pentatonics', 'Improvisation', 'Rhythm Playing'],
+  genres: ['Rock', 'Blues', 'Metal', 'Jazz', 'Fusion', 'Funk', 'Acoustic', 'Pop', 'Classic Rock'],
+  featured: [
+    { title: 'Blues Jam in A Minor', key: 'A Minor', style: 'Blues', image: '/jam-tracks/hero-artist_BB_King.jpg' },
+    { title: 'Classic Rock Soloing', key: 'E Minor', style: 'Rock', image: '/jam-tracks/hero-artist_Deep_Purple.jpg' },
+    { title: 'Metal Rhythm Track', key: 'D Minor', style: 'Metal', image: '/jam-tracks/hero-artist_Metallica.jpg' },
+    { title: 'Funk Groove Jam', key: 'G Minor', style: 'Funk', image: '/jam-tracks/hero-artist_Stevie_Ray_Vaughan.jpg' },
+  ],
+  jamTracks: {
+    keys: ['A Minor', 'E Minor', 'G Major', 'D Major', 'C Major'],
+    types: ['Pentatonic', 'Dorian', 'Mixolydian', 'Blues', 'Fusion', 'Fast', 'Slow'],
+    featured: [
+      { title: 'Minor Pentatonic Jam', key: 'A Minor', image: '/jam-tracks/hero-artist_BB_King.jpg' },
+      { title: 'Dorian Groove', key: 'E Dorian', image: '/jam-tracks/hero-artist_Carlos_Santana.jpg' },
+      { title: 'Blues Shuffle', key: 'G Major', image: '/jam-tracks/hero-artist_Stevie_Ray_Vaughan.jpg' },
+    ]
+  },
+  songTracks: [
+    { title: 'Sweet Child O Mine', artist: "Guns N' Roses", image: '/jam-tracks/hero-artist_Guns_N_Roses.jpg' },
+    { title: 'Smoke on the Water', artist: 'Deep Purple', image: '/jam-tracks/hero-artist_Deep_Purple.jpg' },
+    { title: 'Eagles Medley', artist: 'Eagles', image: '/jam-tracks/hero-artist_Eagles.jpg' },
+    { title: 'Nothing Else Matters', artist: 'Metallica', image: '/jam-tracks/hero-artist_Metallica.jpg' },
+  ]
 }
 
 const currentTab = computed(() => {
