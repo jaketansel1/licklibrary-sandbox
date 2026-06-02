@@ -2,7 +2,7 @@
   <div class="absolute top-full left-0 w-full bg-[#1a1a1a] border-t border-white/10 z-50">
 
     <!-- ===================== TAB BAR ===================== -->
-<div v-if="type !== 'tutors'" class="flex items-center gap-10 px-12 border-b border-white/10">
+<div v-if="type !== 'tutors' && type !== 'learning-paths'" class="flex items-center gap-10 px-12 border-b border-white/10">
       <button
         v-for="tab in tabs"
         :key="tab"
@@ -108,13 +108,11 @@
         <!-- Left: context-sensitive links -->
         <div class="w-40 shrink-0">
           <template v-if="activeTab === 'Tutors'">
-            <p class="text-brand text-xs uppercase tracking-widest mb-4">Tutors</p>
-            <ul class="space-y-3">
-              <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">All Tutors</a></li>
-              <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">Featured Tutors</a></li>
-              <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">New Tutors</a></li>
-            </ul>
-          </template>
+  <p class="text-brand text-xs uppercase tracking-widest mb-4">Tutors</p>
+  <ul class="space-y-3">
+    <li><a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">All Tutors</a></li>
+  </ul>
+</template>
           <template v-else-if="activeTab === 'Artists'">
             <p class="text-brand text-xs uppercase tracking-widest mb-4">Artists</p>
             <ul class="space-y-3">
@@ -316,7 +314,6 @@
           <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
         </li>
       </ul>
-      <p class="text-brand text-xs uppercase tracking-widest mb-4">Practice Goals</p>
       <ul class="space-y-3">
         <li v-for="goal in backingTracksTab.practiceGoals" :key="goal">
           <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ goal }}</a>
@@ -427,7 +424,7 @@
     <div class="w-40 shrink-0">
       <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
       <ul class="space-y-3">
-        <li v-for="link in ['All Video Jams', 'Beginner', 'Intermediate', 'Advanced']" :key="link">
+        <li v-for="link in ['All Video Jams']" :key="link">
           <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
         </li>
       </ul>
@@ -452,8 +449,7 @@
 <!-- ===================== LEARNING PATHS MENU ===================== -->
 <div v-else-if="type === 'learning-paths'">
 
-  <!-- FEATURED tab -->
-  <div v-if="activeTab === 'Featured'" class="flex px-12 py-8 gap-10">
+  <div class="flex px-12 py-8 gap-10">
     <div class="w-40 shrink-0">
       <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
       <ul class="space-y-3">
@@ -481,64 +477,9 @@
     </div>
   </div>
 
-  <!-- BY LEVEL tab -->
-  <div v-else-if="activeTab === 'By Level'" class="flex px-12 py-8 gap-10">
-    <div class="w-40 shrink-0">
-      <p class="text-brand text-xs uppercase tracking-widest mb-4">Level</p>
-      <ul class="space-y-3">
-        <li v-for="level in learningPathsTab.levels" :key="level">
-          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ level }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="w-px bg-white/10 shrink-0"></div>
-    <div class="flex-1">
-      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured Paths</p>
-      <div class="flex gap-6">
-        <div
-          v-for="path in learningPathsTab.featured"
-          :key="path.title"
-          class="flex-1 group cursor-pointer"
-        >
-          <div class="overflow-hidden mb-3">
-            <img :src="path.image" :alt="path.title" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500" />
-          </div>
-          <span class="inline-block text-xs font-semibold uppercase tracking-wide px-2 py-1 bg-white/10 text-white/60 mb-2">{{ path.level }}</span>
-          <p class="text-white text-sm font-semibold leading-snug mb-1">{{ path.title }}</p>
-          <p class="text-white/40 text-xs">{{ path.tutor }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
-  <!-- BY STYLE tab -->
-  <div v-else class="flex px-12 py-8 gap-10">
-    <div class="w-40 shrink-0">
-      <p class="text-brand text-xs uppercase tracking-widest mb-4">Style</p>
-      <ul class="space-y-3">
-        <li v-for="style in learningPathsTab.styles" :key="style">
-          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ style }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="w-px bg-white/10 shrink-0"></div>
-    <div class="flex-1">
-      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured Paths</p>
-      <div class="flex gap-6">
-        <div
-          v-for="path in learningPathsTab.featured"
-          :key="path.title"
-          class="flex-1 group cursor-pointer"
-        >
-          <div class="overflow-hidden mb-3">
-            <img :src="path.image" :alt="path.title" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500" />
-          </div>
-          <p class="text-white text-sm font-semibold leading-snug mb-1">{{ path.title }}</p>
-          <p class="text-white/40 text-xs">{{ path.tutor }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 
 </div>
 
@@ -593,8 +534,8 @@ const props = defineProps({
 })
 
 const lessonsTabs = ['Featured', 'New', 'Song Lessons', 'Genre', 'Artists', 'Tutors', 'Most Watched']
-const coursesTabs = ['New', 'Classic Albums', 'Technique', 'Song Courses', 'Beginners', 'Learning Paths', 'Licks', 'Most Watched']
-const backingTracksTabs = ['Featured', 'Genres', 'Jam Tracks', 'Song Tracks', 'Video Jams', 'New']
+const coursesTabs = ['Featured', 'New', 'Classic Albums', 'Technique', 'Song Courses', 'Beginners', 'Learning Paths', 'Licks', 'Most Watched']
+const backingTracksTabs = ['Featured', 'Genres', 'Jam Tracks', 'Song Tracks', 'Video Jams']
 const learningPathsTabs = ['Featured', 'By Level', 'By Style']
 
 const tabs = computed(() => {
@@ -693,6 +634,20 @@ genreFeatures: [
 }
 
 const tabContent = {
+'Featured': {
+  layout: 'portrait',
+  browseLinks: ['All Courses', 'Latest', 'Most Popular'],
+  genres: ['Rock', 'Metal', 'Blues', 'Acoustic'],
+  featured: [
+    { title: 'The Extremist', tutor: 'Danny Gill', image: '/course-1.jpg' },
+    { title: 'Are You Experienced', tutor: 'Danny Gill', image: '/course-2.jpg' },
+    { title: 'Highway to Hell', tutor: 'Danny Gill', image: '/course-4.jpg' },
+    { title: 'Hotel California', tutor: 'Danny Gill', image: '/course-5.jpg' },
+    { title: 'Dark Side of the Moon', tutor: 'Jamie Humphries', image: '/course-6.jpg' },
+    { title: 'The Number Of The Beast', tutor: 'Danny Gill', image: '/course-10.jpg' },
+  ]
+},
+
   'New': {
     layout: 'portrait',
     browseLinks: ['All New Courses', 'Latest', 'Most Popular'],
@@ -721,8 +676,8 @@ const tabContent = {
   },
   'Learning Paths': {
     layout: 'landscape',
-    browseLinks: ['All Learning Paths', 'Latest', 'Most Popular'],
-    genres: ['Beginner', 'Intermediate', 'Advanced'],
+    browseLinks: ['All Learning Paths'],
+    genres: [],
     featured: [
       { title: '2 Week Scales Bootcamp', tutor: 'Sam Bell', image: '/learningpath-1.jpg' },
       { title: '2 Week Technique Builder', tutor: 'Sam Bell', image: '/learningpath-2.jpg' },
@@ -732,8 +687,7 @@ const tabContent = {
 }
 
 const backingTracksTab = {
-  browseLinks: ['All Backing Tracks', 'Latest', 'Most Popular', 'Beginner Friendly'],
-  practiceGoals: ['Soloing', 'Pentatonics', 'Improvisation', 'Rhythm Playing'],
+  browseLinks: ['All Backing Tracks', 'Most Popular'],
   genres: ['Rock', 'Blues', 'Metal', 'Jazz', 'Fusion', 'Funk', 'Acoustic', 'Pop', 'Classic Rock'],
   featured: [
     { title: 'Blues Jam in A Minor', key: 'A Minor', style: 'Blues', image: '/jam-tracks/hero-artist_BB_King.jpg' },
@@ -759,9 +713,8 @@ const backingTracksTab = {
 }
 
 const learningPathsTab = {
-  browseLinks: ['All Learning Paths', 'Latest', 'Most Popular'],
+  browseLinks: ['All Learning Paths'],
   levels: ['Beginner', 'Intermediate', 'Advanced'],
-  styles: ['Rock', 'Blues', 'Metal', 'Acoustic', 'Technique', 'Theory'],
   featured: [
     { title: '2 Week Scales Bootcamp', tutor: 'Sam Bell', level: 'Beginner', image: '/learning-paths/learningpath-1.jpg' },
     { title: '2 Week Technique Builder', tutor: 'Sam Bell', level: 'Intermediate', image: '/learning-paths/learningpath-2.jpg' },
@@ -772,7 +725,7 @@ const learningPathsTab = {
 const tutorsTabs = ['Featured']
 
 const tutorsMenuTab = {
-  browseLinks: ['All Tutors', 'Featured Tutors', 'New Tutors'],
+  browseLinks: ['All Tutors'],
   genres: ['Rock', 'Blues', 'Metal', 'Acoustic', 'Fusion', 'Jazz', 'Beginner Friendly'],
   featured: [
     { name: 'Danny Gill', genre: 'Rock · Blues', image: '/tutors/hero-tutor_Danny_Gill.jpg' },
