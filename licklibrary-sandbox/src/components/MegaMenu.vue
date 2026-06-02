@@ -161,6 +161,7 @@
                 <img :src="tutor.image" :alt="tutor.name" class="w-full aspect-square object-cover object-top group-hover:scale-105 transition duration-500" />
               </div>
               <p class="text-white text-sm font-semibold">{{ tutor.name }}</p>
+<p class="text-white/40 text-xs mt-1">{{ tutor.lessons }} lessons</p>
             </div>
           </div>
         </div>
@@ -168,13 +169,14 @@
         <!-- ARTISTS tab -->
         <div v-else-if="activeTab === 'Artists'" class="flex-1">
           <p class="text-brand text-xs uppercase tracking-widest mb-6">Popular Artists</p>
-          <div class="grid grid-cols-6 gap-6 grid-rows-2">
+          <div class="grid grid-cols-6 2xl:grid-cols-5 gap-6">
             <div
-              v-for="artist in lessonsTab.artists"
-              :key="artist.name"
-              class="flex flex-col items-center gap-3 group cursor-pointer"
-            >
-              <div class="w-20 h-20 rounded-full overflow-hidden bg-white/10">
+  v-for="(artist, index) in lessonsTab.artists"
+  :key="artist.name"
+  class="flex flex-col items-center gap-3 group cursor-pointer"
+  :class="index >= 10 ? '2xl:hidden' : ''"
+>
+              <div class="w-20 h-20 2xl:w-28 2xl:h-28 rounded-full overflow-hidden bg-white/10">
                 <img :src="artist.image" :alt="artist.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
               </div>
               <span class="text-white/60 group-hover:text-white text-xs font-medium text-center transition duration-200">{{ artist.name }}</span>
@@ -509,10 +511,10 @@
           class="flex-1 group cursor-pointer"
         >
           <div class="overflow-hidden mb-3">
-            <img :src="tutor.image" :alt="tutor.name" class="w-full aspect-video object-cover object-top group-hover:scale-105 transition duration-500" />
+            <img :src="tutor.image" :alt="tutor.name" class="w-full aspect-square object-cover object-top group-hover:scale-105 transition duration-500" />
           </div>
           <p class="text-white text-sm font-semibold mb-1">{{ tutor.name }}</p>
-          <p class="text-white/40 text-xs">{{ tutor.genre }}</p>
+          <p class="text-white/40 text-xs">{{ tutor.lessons }} lessons</p>
         </div>
       </div>
     </div>
@@ -590,13 +592,13 @@ const lessonsTab = {
 ],
 
   tutors: [
-  { name: 'Danny Gill', image: '/hero-tutor_Danny_Gill.jpg' },
-  { name: 'Edoardo Taddei', image: '/hero-tutor_Edoardo_Taddei.jpg' },
-  { name: 'Eliza Lee', image: '/hero-tutor_Eliza_Lee.jpg' },
-  { name: 'Jamie Humphries', image: '/hero-tutor_Jamie_Humphries.jpg' },
-  { name: 'Nick Jennison', image: '/hero-tutor_Nick_Jennison_2.jpg' },
-  { name: 'Rich Shaw', image: '/hero-tutor_Rich_Shaw.jpg' },
-  { name: 'Sam Bell', image: '/hero-tutor_Sam_Bell.jpg' },
+  { name: 'Danny Gill', lessons: 187, image: '/hero-tutor_Danny_Gill.jpg' },
+  { name: 'Edoardo Taddei', lessons: 74, image: '/hero-tutor_Edoardo_Taddei.jpg' },
+  { name: 'Eliza Lee', lessons: 45, image: '/hero-tutor_Eliza_Lee.jpg' },
+  { name: 'Jamie Humphries', lessons: 203, image: '/hero-tutor_Jamie_Humphries.jpg' },
+  { name: 'Nick Jennison', lessons: 118, image: '/hero-tutor_Nick_Jennison_2.jpg' },
+  { name: 'Rich Shaw', lessons: 89, image: '/hero-tutor_Rich_Shaw.jpg' },
+  { name: 'Sam Bell', lessons: 214, image: '/hero-tutor_Sam_Bell.jpg' },
 ],
 
 genres: ['Classic Rock', "80's Rock", 'Rock', 'Blues', 'Metal', 'Acoustic', 'Country', 'Fusion', 'Jazz', 'Pop'],
@@ -726,13 +728,14 @@ const tutorsTabs = ['Featured']
 
 const tutorsMenuTab = {
   browseLinks: ['All Tutors'],
-  genres: ['Rock', 'Blues', 'Metal', 'Acoustic', 'Fusion', 'Jazz', 'Beginner Friendly'],
   featured: [
-    { name: 'Danny Gill', genre: 'Rock · Blues', image: '/tutors/hero-tutor_Danny_Gill.jpg' },
-    { name: 'Sam Bell', genre: 'Metal · Fusion', image: '/tutors/hero-tutor_Sam_Bell.jpg' },
-    { name: 'Dave Kilminster', genre: 'Rock · Progressive', image: '/tutors/hero-tutor_Dave_Kilminster.jpg' },
-    { name: 'Jamie Humphries', genre: 'Rock · Blues', image: '/tutors/hero-tutor_Jamie_Humphries.jpg' },
-    { name: 'Guthrie Govan', genre: 'Fusion · Rock', image: '/tutors/hero-tutor_Guthrie_Govan.jpg' },
+    { name: 'Danny Gill', lessons: 187, image: '/tutors/hero-tutor_Danny_Gill.jpg' },
+    { name: 'Sam Bell', lessons: 214, image: '/tutors/hero-tutor_Sam_Bell.jpg' },
+    { name: 'Dave Kilminster', lessons: 156, image: '/tutors/hero-tutor_Dave_Kilminster.jpg' },
+    { name: 'Jamie Humphries', lessons: 203, image: '/tutors/hero-tutor_Jamie_Humphries.jpg' },
+    { name: 'Guthrie Govan', lessons: 91, image: '/tutors/hero-tutor_Guthrie_Govan.jpg' },
+    { name: 'Rich Shaw', lessons: 89, image: '/tutors/hero-tutor_Rich_Shaw.jpg' },
+    { name: 'Andy James', lessons: 98, image: '/tutors/hero-tutor_Andy_James.jpg' },
   ]
 }
 
