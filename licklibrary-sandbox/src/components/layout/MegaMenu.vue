@@ -455,9 +455,9 @@
     <div class="w-40 shrink-0">
       <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
       <ul class="space-y-3">
-        <li v-for="link in learningPathsTab.browseLinks" :key="link">
-          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
-        </li>
+        <li>
+  <RouterLink to="/learning-paths" class="text-white/60 hover:text-white text-sm transition duration-200">All Learning Paths</RouterLink>
+</li>
       </ul>
     </div>
     <div class="w-px bg-white/10 shrink-0"></div>
@@ -493,9 +493,9 @@
     <div class="w-40 shrink-0">
       <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
       <ul class="space-y-3">
-        <li v-for="link in tutorsMenuTab.browseLinks" :key="link">
-          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
-        </li>
+        <li>
+  <RouterLink to="/tutors" class="text-white/60 hover:text-white text-sm transition duration-200">All Tutors</RouterLink>
+</li>
       </ul>
     </div>
     <div class="w-px bg-white/10 shrink-0"></div>
