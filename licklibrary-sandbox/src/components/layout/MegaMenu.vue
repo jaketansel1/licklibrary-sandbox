@@ -166,19 +166,20 @@
           </div>
         </div>
 
-        <!-- ARTISTS tab -->
+       <!-- ARTISTS tab -->
 <div v-else-if="activeTab === 'Artists'" class="flex-1">
   <p class="text-brand text-xs uppercase tracking-widest mb-6">Popular Artists</p>
-  <div class="flex gap-8">
+  <div class="flex gap-6">
     <div
       v-for="(artist, index) in lessonsTab.artists.slice(0, 7)"
       :key="artist.name"
-      class="flex flex-col items-center gap-3 group cursor-pointer"
+      class="flex-1 group cursor-pointer"
     >
-      <div class="w-32 h-32 2xl:w-40 2xl:h-40 rounded-full overflow-hidden bg-white/10">
-        <img :src="artist.image" :alt="artist.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+      <div class="overflow-hidden mb-3">
+        <img :src="artist.image" :alt="artist.name" class="w-full aspect-square object-cover object-top group-hover:scale-105 transition duration-500" />
       </div>
-      <span class="text-white/80 group-hover:text-white text-xs font-medium text-center transition duration-200">{{ artist.name }}</span>
+      <p class="text-white text-sm font-semibold">{{ artist.name }}</p>
+      <p class="text-white/40 text-xs mt-1">{{ artist.lessons }} lessons</p>
     </div>
   </div>
 </div>
@@ -573,20 +574,20 @@ const lessonsTab = {
     { title: 'Back in Black', artist: 'AC/DC' },
     { title: 'Eruption', artist: 'Van Halen' },
   ],
-  artists: [
-    { name: 'AC/DC', image: '/artist-acdc.jpg' },
-    { name: 'Black Sabbath', image: '/artist-blacksabbath.jpg' },
-    { name: 'Eagles', image: '/artist-eagles.jpg' },
-    { name: 'Eric Clapton', image: '/artist-ericclapton.jpg' },
-    { name: 'Foo Fighters', image: '/artist-foofighters.jpg' },
-    { name: "Guns N' Roses", image: '/artist-gunsnroses.jpg' },
-    { name: 'Jimi Hendrix', image: '/artist-jimihendrix.jpg' },
-    { name: 'Led Zeppelin', image: '/artist-ledzeppelin.jpg' },
-    { name: 'Pink Floyd', image: '/artist-pinkfloyd.jpg' },
-    { name: 'Metallica', image: '/artist-metallica.jpg' },
-{ name: 'Iron Maiden', image: '/artist-ironmaiden.jpg' },
-{ name: 'Linkin Park', image: '/artist-linkinpark.jpg' },
-  ],
+ artists: [
+  { name: 'AC/DC', lessons: 24, image: '/artist-acdc.jpg' },
+  { name: 'Black Sabbath', lessons: 18, image: '/artist-blacksabbath.jpg' },
+  { name: 'Eagles', lessons: 14, image: '/artist-eagles.jpg' },
+  { name: 'Eric Clapton', lessons: 31, image: '/artist-ericclapton.jpg' },
+  { name: 'Foo Fighters', lessons: 12, image: '/artist-foofighters.jpg' },
+  { name: "Guns N' Roses", lessons: 27, image: '/artist-gunsnroses.jpg' },
+  { name: 'Jimi Hendrix', lessons: 22, image: '/artist-jimihendrix.jpg' },
+  { name: 'Led Zeppelin', lessons: 19, image: '/artist-ledzeppelin.jpg' },
+  { name: 'Pink Floyd', lessons: 16, image: '/artist-pinkfloyd.jpg' },
+  { name: 'Metallica', lessons: 33, image: '/artist-metallica.jpg' },
+  { name: 'Iron Maiden', lessons: 15, image: '/artist-ironmaiden.jpg' },
+  { name: 'Linkin Park', lessons: 11, image: '/artist-linkinpark.jpg' },
+],
 
   whatsHot: [
     { title: 'Billy Idol', tutor: 'Danny Gill', level: 'Intermediate', image: '/hero-artist_Billy_Idol.jpg' },
