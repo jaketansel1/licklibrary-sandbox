@@ -1,8 +1,14 @@
 <template>
+  <!-- MegaMenu.vue
+    Props: type (String) — 'lessons' | 'courses' | 'backing-tracks' | 'learning-paths' | 'tutors'
+    Triggered by: AppNav.vue @mouseenter on each nav item
+    Data source: ../../data/megaMenuData.js
+    PROTOTYPE — image paths, hrefs and mock data need real implementation
+  -->
   <div class="absolute top-full left-0 w-full bg-[#1a1a1a] border-t border-white/10 z-50">
 
     <!-- ===================== TAB BAR ===================== -->
-<div v-if="type !== 'tutors' && type !== 'learning-paths'" class="flex items-center gap-10 px-12 border-b border-white/10">
+    <div v-if="type !== 'tutors' && type !== 'learning-paths'" class="flex items-center gap-10 px-12 border-b border-white/10">
       <button
         v-for="tab in tabs"
         :key="tab"
