@@ -160,7 +160,7 @@
               <div class="overflow-hidden mb-3">
                 <img :src="tutor.image" :alt="tutor.name" class="w-full aspect-square object-cover object-top group-hover:scale-105 transition duration-500" />
               </div>
-              <p class="text-white text-sm font-semibold">{{ tutor.name }}</p>
+              <p class="text-white text-xs font-semibold">{{ tutor.name }}</p>
 <p class="text-white/40 text-xs mt-1">{{ tutor.lessons }} lessons</p>
             </div>
           </div>
@@ -178,7 +178,7 @@
       <div class="overflow-hidden mb-3">
         <img :src="artist.image" :alt="artist.name" class="w-full aspect-square object-cover object-top group-hover:scale-105 transition duration-500" />
       </div>
-      <p class="text-white text-sm font-semibold">{{ artist.name }}</p>
+      <p class="text-white text-xs font-semibold">{{ artist.name }}</p>
       <p class="text-white/40 text-xs mt-1">{{ artist.lessons }} lessons</p>
     </div>
   </div>
@@ -396,7 +396,7 @@
           <div class="overflow-hidden mb-2">
             <img :src="track.image" :alt="track.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
           </div>
-          <p class="text-white text-sm font-semibold">{{ track.title }}</p>
+          <p class="text-white text-xs font-semibold">{{ track.title }}</p>
           <p class="text-white/40 text-xs mt-1">{{ track.key }}</p>
         </div>
       </div>
@@ -523,7 +523,7 @@
           <div class="overflow-hidden mb-3">
             <img :src="tutor.image" :alt="tutor.name" class="w-full aspect-square object-cover object-top group-hover:scale-105 transition duration-500" />
           </div>
-          <p class="text-white text-sm font-semibold mb-1">{{ tutor.name }}</p>
+          <p class="text-white text-xs font-semibold mb-1">{{ tutor.name }}</p>
           <p class="text-white/40 text-xs">{{ tutor.lessons }} lessons</p>
         </div>
       </div>
