@@ -167,22 +167,21 @@
         </div>
 
         <!-- ARTISTS tab -->
-        <div v-else-if="activeTab === 'Artists'" class="flex-1">
-          <p class="text-brand text-xs uppercase tracking-widest mb-6">Popular Artists</p>
-          <div class="grid grid-cols-6 2xl:grid-cols-5 gap-6">
-            <div
-  v-for="(artist, index) in lessonsTab.artists"
-  :key="artist.name"
-  class="flex flex-col items-center gap-3 group cursor-pointer"
-  :class="index >= 10 ? '2xl:hidden' : ''"
->
-              <div class="w-20 h-20 2xl:w-28 2xl:h-28 rounded-full overflow-hidden bg-white/10">
-                <img :src="artist.image" :alt="artist.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
-              </div>
-              <span class="text-white/60 group-hover:text-white text-xs font-medium text-center transition duration-200">{{ artist.name }}</span>
-            </div>
-          </div>
-        </div>
+<div v-else-if="activeTab === 'Artists'" class="flex-1">
+  <p class="text-brand text-xs uppercase tracking-widest mb-6">Popular Artists</p>
+  <div class="flex gap-8">
+    <div
+      v-for="(artist, index) in lessonsTab.artists.slice(0, 7)"
+      :key="artist.name"
+      class="flex flex-col items-center gap-3 group cursor-pointer"
+    >
+      <div class="w-32 h-32 2xl:w-40 2xl:h-40 rounded-full overflow-hidden bg-white/10">
+        <img :src="artist.image" :alt="artist.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+      </div>
+      <span class="text-white/80 group-hover:text-white text-xs font-medium text-center transition duration-200">{{ artist.name }}</span>
+    </div>
+  </div>
+</div>
 
         <!-- GENRE tab -->
         <div v-else-if="activeTab === 'Genre'" class="flex-1">
@@ -240,69 +239,76 @@
         </div>
 
       </div>
-
+<div class="flex justify-end px-12 pb-6">
+  <a href="/guitar-lessons" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Guitar Lessons →</a>
+</div>
     </div>
 
     <!-- ===================== GUITAR COURSES MENU ===================== -->
-    <div v-else-if="type === 'courses'" class="flex px-12 py-8 gap-10">
+<div v-else-if="type === 'courses'">
+  <div class="flex px-12 py-8 gap-10">
 
-      <!-- Left: Browse + Genre -->
-      <div class="w-40 shrink-0">
-        <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
-        <ul class="space-y-3 mb-8">
-          <li v-for="link in currentTab.browseLinks" :key="link">
-            <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
-          </li>
-        </ul>
-        <p class="text-brand text-xs uppercase tracking-widest mb-4">Genre</p>
-        <ul class="space-y-3">
-          <li v-for="genre in currentTab.genres" :key="genre">
-            <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ genre }}</a>
-          </li>
-        </ul>
+    <!-- Left: Browse + Genre -->
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
+      <ul class="space-y-3 mb-8">
+        <li v-for="link in currentTab.browseLinks" :key="link">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
+        </li>
+      </ul>
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Genre</p>
+      <ul class="space-y-3">
+        <li v-for="genre in currentTab.genres" :key="genre">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ genre }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Divider -->
+    <div class="w-px bg-white/10 shrink-0"></div>
+
+    <!-- Right: Featured cards -->
+    <div class="flex-1">
+      <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured</p>
+
+      <!-- Portrait layout -->
+      <div v-if="currentTab.layout === 'portrait'" class="flex gap-4 overflow-hidden">
+        <div
+          v-for="(course, index) in currentTab.featured"
+          :key="course.title"
+          class="w-42 shrink-0 cursor-pointer group"
+          :class="index >= 6 ? 'hidden 2xl:block' : ''"
+        >
+          <div class="overflow-hidden mb-3">
+            <img :src="course.image" :alt="course.title" class="w-full aspect-[2/3] max-h-64 object-cover group-hover:scale-105 transition duration-500" />
+          </div>
+          <p class="text-white text-xs font-semibold leading-snug">{{ course.title }}</p>
+          <p class="text-white/40 text-xs mt-1">{{ course.tutor }}</p>
+        </div>
       </div>
 
-      <!-- Divider -->
-      <div class="w-px bg-white/10 shrink-0"></div>
-
-      <!-- Right: Featured cards -->
-      <div class="flex-1">
-        <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured</p>
-
-        <!-- Portrait layout (New, Classic Albums etc) -->
-        <div v-if="currentTab.layout === 'portrait'" class="flex gap-4 overflow-hidden">
-          <div
-            v-for="(course, index) in currentTab.featured"
-            :key="course.title"
-            class="w-42 shrink-0 cursor-pointer group"
-            :class="index === 5 ? 'hidden 2xl:block' : ''"
-          >
-            <div class="overflow-hidden mb-3">
-              <img :src="course.image" :alt="course.title" class="w-full aspect-[2/3] max-h-64 object-cover group-hover:scale-105 transition duration-500" />
-            </div>
-            <p class="text-white text-xs font-semibold leading-snug">{{ course.title }}</p>
-            <p class="text-white/40 text-xs mt-1">{{ course.tutor }}</p>
+      <!-- Landscape layout -->
+      <div v-else class="flex flex-row gap-6">
+        <div
+          v-for="course in currentTab.featured"
+          :key="course.title"
+          class="flex-1 cursor-pointer group"
+        >
+          <div class="overflow-hidden mb-3">
+            <img :src="course.image" :alt="course.title" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500" />
           </div>
+          <p class="text-white text-sm font-semibold leading-snug mb-1">{{ course.title }}</p>
+          <p class="text-white/40 text-xs">{{ course.tutor }}</p>
         </div>
-
-        <!-- Landscape layout (Learning Paths) -->
-        <div v-else class="flex flex-row gap-6">
-          <div
-            v-for="course in currentTab.featured"
-            :key="course.title"
-            class="flex-1 cursor-pointer group"
-          >
-            <div class="overflow-hidden mb-3">
-              <img :src="course.image" :alt="course.title" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500" />
-            </div>
-            <p class="text-white text-sm font-semibold leading-snug mb-1">{{ course.title }}</p>
-            <p class="text-white/40 text-xs">{{ course.tutor }}</p>
-          </div>
-        </div>
-
       </div>
 
     </div>
+
+  </div>
+  <div class="flex justify-end px-12 pb-6">
+    <a href="/guitar-courses" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Guitar Courses →</a>
+  </div>
+</div>
 
 <!-- ===================== BACKING TRACKS MENU ===================== -->
 <div v-else-if="type === 'backing-tracks'">
@@ -446,6 +452,10 @@
     </div>
   </div>
 
+<div class="flex justify-end px-12 pb-6">
+  <a href="/backing-tracks" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Backing Tracks →</a>
+</div>
+
 </div>
 
 <!-- ===================== LEARNING PATHS MENU ===================== -->
@@ -479,10 +489,9 @@
     </div>
   </div>
 
-  
-
- 
-
+<div class="flex justify-end px-12 pb-6">
+  <RouterLink to="/learning-paths" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Learning Paths →</RouterLink>
+</div>
 </div>
 
 <!-- ===================== TUTORS MENU ===================== -->
@@ -520,6 +529,9 @@
     </div>
   </div>
 
+<div class="flex justify-end px-12 pb-6">
+  <RouterLink to="/tutors" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Tutors →</RouterLink>
+</div>
 </div>
 
   </div>
@@ -647,6 +659,7 @@ const tabContent = {
     { title: 'Hotel California', tutor: 'Danny Gill', image: '/course-5.jpg' },
     { title: 'Dark Side of the Moon', tutor: 'Jamie Humphries', image: '/course-6.jpg' },
     { title: 'The Number Of The Beast', tutor: 'Danny Gill', image: '/course-10.jpg' },
+     { title: 'Dr. Feelgood', tutor: 'Danny Gill', image: '/course-3.jpg' },
   ]
 },
 
@@ -661,6 +674,7 @@ const tabContent = {
       { title: 'Highway to Hell', tutor: 'Danny Gill', image: '/course-4.jpg' },
       { title: 'Hotel California', tutor: 'Danny Gill', image: '/course-5.jpg' },
       { title: 'Dark Side of the Moon', tutor: 'Jamie Humphries', image: '/course-6.jpg' },
+      { title: 'Metallica - The Black Album', tutor: 'Jamie Humphries', image: '/course-7.jpg' },
     ]
   },
   'Classic Albums': {
@@ -674,6 +688,7 @@ const tabContent = {
       { title: 'Machine Head', tutor: 'Danny Gill', image: '/course-9.jpg' },
       { title: 'The Number Of The Beast', tutor: 'Danny Gill', image: '/course-10.jpg' },
       { title: 'The Extremist', tutor: 'Danny Gill', image: '/course-1.jpg' },
+      { title: 'Highway to Hell', tutor: 'Danny Gill', image: '/course-4.jpg' },
     ]
   },
   'Learning Paths': {
