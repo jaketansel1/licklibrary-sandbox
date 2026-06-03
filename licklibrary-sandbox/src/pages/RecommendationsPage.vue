@@ -1,13 +1,13 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import AppNav from '../components/AppNav.vue'
-import FooterSection from '../components/FooterSection.vue'
+import AppNav from '../components/layout/AppNav.vue'
+import FooterSection from '../components/layout/FooterSection.vue'
 
 const route = useRoute()
 const router = useRouter()
 
-import PathCard from '../components/PathCard.vue'
+import PathCard from '../components/shared/PathCard.vue'
 
 const recommendedPaths = [
   {

@@ -1,5 +1,5 @@
 <script setup>
-import { useDiscovery } from '../composables/useDiscovery.js'
+import { useDiscovery } from '../../composables/useDiscovery.js'
 
 const {
   currentStep,

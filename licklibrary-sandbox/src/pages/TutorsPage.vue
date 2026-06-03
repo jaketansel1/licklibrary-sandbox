@@ -1,5 +1,5 @@
 <script setup>
-import AppNav from '../components/AppNav.vue'
+import AppNav from '../components/layout/AppNav.vue'
 
 const tutors = [
   { name: 'Danny Gill', slug: 'danny-gill', genre: 'Rock · Blues', lessons: 187, courses: 24, featured: true, image: '/tutors/hero-tutor_Danny_Gill' },

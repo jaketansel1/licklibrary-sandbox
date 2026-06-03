@@ -58,9 +58,9 @@
 </template>
 
 <script setup>
-import PathCard from '../components/PathCard.vue'
+import PathCard from '../components/shared/PathCard.vue'
 import { ref, computed } from 'vue'
-import NavBar from '../components/AppNav.vue'
+import NavBar from '../components/layout/AppNav.vue'
 
 const filters = ['All', 'Beginner', 'Intermediate', 'Advanced']
 const activeFilter = ref('All')

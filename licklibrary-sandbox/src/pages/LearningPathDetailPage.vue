@@ -157,10 +157,10 @@
 </template>
 
 <script setup>
-import NavBar from '../components/AppNav.vue'
-import TutorSection from '../components/TutorSection.vue'
-import PathCard from '../components/PathCard.vue'
-import FooterSection from '../components/FooterSection.vue'
+import NavBar from '../components/layout/AppNav.vue'
+import TutorSection from '../components/tutors/TutorSection.vue'
+import PathCard from '../components/shared/PathCard.vue'
+import FooterSection from '../components/layout/FooterSection.vue'
 
 const curriculum = [
   {

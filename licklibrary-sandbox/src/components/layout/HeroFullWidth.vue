@@ -1,10 +1,10 @@
 <script setup>
 import { ref, watch, onMounted, onUnmounted } from 'vue'
-import DiscoveryBannerCard from '../components/DiscoveryBannerCard.vue'
-import DiscoveryBannerLight from '../components/DiscoveryBannerLight.vue'
-import DiscoveryBannerCardV2 from '../components/DiscoveryBannerCardV2.vue'
-import DiscoveryBannerCardV3 from '../components/DiscoveryBannerCardV3.vue'
-import { useDiscovery } from '../composables/useDiscovery.js'
+import DiscoveryBannerCard from '../discovery/DiscoveryBannerCard.vue'
+import DiscoveryBannerLight from '../discovery/DiscoveryBannerLight.vue'
+import DiscoveryBannerCardV2 from '../discovery/DiscoveryBannerCardV2.vue'
+import DiscoveryBannerCardV3 from '../discovery/DiscoveryBannerCardV3.vue'
+import { useDiscovery } from '../../composables/useDiscovery.js'
 
 
 const { isEngaged } = useDiscovery()

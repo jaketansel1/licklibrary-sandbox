@@ -162,9 +162,9 @@
 
 <script setup>
 import { ref } from 'vue'
-import NavBar from '../components/AppNav.vue'
-import PathCard from '../components/PathCard.vue'
-import FooterSection from '../components/FooterSection.vue'
+import NavBar from '../components/layout/AppNav.vue'
+import PathCard from '../components/shared/PathCard.vue'
+import FooterSection from '../components/layout/FooterSection.vue'
 
 const videoRef = ref(null)
 const isPlaying = ref(false)

@@ -1,5 +1,5 @@
 <script setup>
-import DiscoveryBanner from './DiscoveryBanner.vue'
+import DiscoveryBanner from '../discovery/DiscoveryBanner.vue'
 </script>
 
 <template>

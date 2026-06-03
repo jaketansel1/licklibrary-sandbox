@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
-import { useDiscovery } from '../composables/useDiscovery.js'
+import { useDiscovery } from '../../composables/useDiscovery.js'
 
 const {
   isEngaged,
