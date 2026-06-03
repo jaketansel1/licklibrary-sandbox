@@ -90,6 +90,7 @@ onUnmounted(() => {
   :class="menuOpen && activeMenu === 'tutors' ? 'text-brand' : 'text-white/90 hover:text-white'"
   @mouseenter="menuOpen = true; activeMenu = 'tutors'"
 >Tutors</RouterLink>
+        <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Community</a>
         <a href="#" class="text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest">Blog</a>
       </div>
       <div class="flex items-center gap-2 text-white/90 hover:text-white text-sm font-medium uppercase tracking-widest cursor-pointer">

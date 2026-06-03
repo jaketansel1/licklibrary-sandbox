@@ -208,20 +208,20 @@
             <div class="w-px bg-white/10 shrink-0"></div>
 
             <!-- Genre feature columns -->
-            <div class="flex flex-1 gap-8">
-              <div v-for="genre in lessonsTab.genreFeatures" :key="genre.name" class="flex-1">
-                <p class="text-brand text-xs uppercase tracking-widest mb-4">{{ genre.name }}</p>
-                <div class="flex flex-col gap-3">
-                  <div v-for="lesson in genre.lessons" :key="lesson.title" class="group cursor-pointer">
-                    <div class="overflow-hidden mb-2">
-                      <img :src="lesson.image" :alt="lesson.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
-                    </div>
-                    <p class="text-white text-xs font-semibold leading-snug">{{ lesson.title }}</p>
-                    <p class="text-white/40 text-xs mt-0.5">{{ lesson.tutor }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+<div class="flex flex-1 gap-8">
+  <div v-for="genre in lessonsTab.genreFeatures" :key="genre.name" class="flex-1">
+    <p class="text-brand text-xs uppercase tracking-widest mb-4">{{ genre.name }}</p>
+    <div class="flex flex-col gap-3">
+      <div v-for="lesson in genre.lessons" :key="lesson.title" class="group cursor-pointer">
+        <div class="overflow-hidden mb-2">
+          <img :src="lesson.image" :alt="lesson.title" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-500" />
+        </div>
+        <p class="text-white text-xs font-semibold leading-snug">{{ lesson.title }}</p>
+        <p class="text-white/40 text-xs mt-0.5">{{ lesson.tutor }}</p>
+      </div>
+    </div>
+  </div>
+</div>
 
           </div>
         </div>
@@ -247,15 +247,53 @@
 
       </div>
 <div class="flex justify-end px-12 pb-6">
-  <a href="/guitar-lessons" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Guitar Lessons →</a>
+  <a v-if="activeTab === 'Artists'" href="/artists" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Artists →</a>
+  <a v-else-if="activeTab === 'Tutors'" href="/tutors" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Tutors →</a>
+  <a v-else href="/guitar-lessons" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Guitar Lessons →</a>
 </div>
     </div>
 
     <!-- ===================== GUITAR COURSES MENU ===================== -->
 <div v-else-if="type === 'courses'">
-  <div class="flex px-12 py-8 gap-10">
 
-    <!-- Left: Browse + Genre -->
+  <!-- GENRE tab -->
+  <div v-if="activeTab === 'Genre'" class="flex px-12 py-8 gap-10">
+    <div class="w-40 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
+      <ul class="space-y-3">
+        <li v-for="link in courseGenreTab.browseLinks" :key="link">
+          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="w-48 shrink-0">
+      <p class="text-brand text-xs uppercase tracking-widest mb-5">Genres</p>
+      <ul class="space-y-3">
+        <li v-for="genre in courseGenreTab.genres" :key="genre">
+          <a href="#" class="text-white/70 hover:text-white text-sm font-medium transition duration-200">{{ genre }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="w-px bg-white/10 shrink-0"></div>
+    <div class="flex gap-10">
+  <div v-for="genre in courseGenreTab.genreFeatures" :key="genre.name" class="flex-1">
+    <p class="text-brand text-xs uppercase tracking-widest mb-4">{{ genre.name }}</p>
+    <div class="flex gap-4">
+      <div v-for="course in genre.courses" :key="course.title" class="w-42 shrink-0 cursor-pointer group">
+  <div class="overflow-hidden mb-3">
+    <img :src="course.image" :alt="course.title" class="w-full aspect-[2/3] max-h-64 object-cover group-hover:scale-105 transition duration-500" />
+  </div>
+        <p class="text-white text-xs font-semibold leading-snug">{{ course.title }}</p>
+        <p class="text-white/40 text-xs mt-0.5">{{ course.tutor }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- ALL OTHER TABS -->
+  <div v-else class="flex px-12 py-8 gap-10">
     <div class="w-40 shrink-0">
       <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
       <ul class="space-y-3 mb-8">
@@ -263,28 +301,40 @@
           <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
         </li>
       </ul>
-      <p class="text-brand text-xs uppercase tracking-widest mb-4">Genre</p>
-      <ul class="space-y-3">
-        <li v-for="genre in currentTab.genres" :key="genre">
-          <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ genre }}</a>
-        </li>
-      </ul>
+      <template v-if="currentTab.techniqueLinks">
+        <p class="text-brand text-xs uppercase tracking-widest mb-4">Technique</p>
+        <ul class="space-y-3 mb-8">
+          <li v-for="link in currentTab.techniqueLinks" :key="link">
+            <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
+          </li>
+        </ul>
+      </template>
+      <template v-if="currentTab.seriesLinks">
+        <p class="text-brand text-xs uppercase tracking-widest mb-4">Series</p>
+        <ul class="space-y-3 mb-8">
+          <li v-for="link in currentTab.seriesLinks" :key="link">
+            <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
+          </li>
+        </ul>
+      </template>
+      <template v-if="currentTab.genres.length > 0">
+        <p class="text-brand text-xs uppercase tracking-widest mb-4">Genre</p>
+        <ul class="space-y-3">
+          <li v-for="genre in currentTab.genres" :key="genre">
+            <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ genre }}</a>
+          </li>
+        </ul>
+      </template>
     </div>
-
-    <!-- Divider -->
     <div class="w-px bg-white/10 shrink-0"></div>
-
-    <!-- Right: Featured cards -->
     <div class="flex-1">
       <p class="text-brand text-xs uppercase tracking-widest mb-6">Featured</p>
-
-      <!-- Portrait layout -->
       <div v-if="currentTab.layout === 'portrait'" class="flex gap-4 overflow-hidden">
         <div
           v-for="(course, index) in currentTab.featured"
           :key="course.title"
           class="w-42 shrink-0 cursor-pointer group"
-          :class="index >= 6 ? 'hidden 2xl:block' : ''"
+:class="index >= 6 ? 'hidden 2xl:block' : ''"
         >
           <div class="overflow-hidden mb-3">
             <img :src="course.image" :alt="course.title" class="w-full aspect-[2/3] max-h-64 object-cover group-hover:scale-105 transition duration-500" />
@@ -293,8 +343,6 @@
           <p class="text-white/40 text-xs mt-1">{{ course.tutor }}</p>
         </div>
       </div>
-
-      <!-- Landscape layout -->
       <div v-else class="flex flex-row gap-6">
         <div
           v-for="course in currentTab.featured"
@@ -308,13 +356,19 @@
           <p class="text-white/40 text-xs">{{ course.tutor }}</p>
         </div>
       </div>
-
     </div>
+  </div>
 
-  </div>
   <div class="flex justify-end px-12 pb-6">
-    <a href="/guitar-courses" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Guitar Courses →</a>
+    <a v-if="activeTab === 'Classic Albums'" href="/guitar-courses/classic-albums" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Classic Albums →</a>
+    <a v-else-if="activeTab === 'Technique'" href="/guitar-courses/technique" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Technique Courses →</a>
+    <a v-else-if="activeTab === 'Song Courses'" href="/guitar-courses/song-courses" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Song Courses →</a>
+    <a v-else-if="activeTab === 'Beginners'" href="/guitar-courses/beginners" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Beginner Courses →</a>
+    <a v-else-if="activeTab === 'Learning Paths'" href="/learning-paths" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Learning Paths →</a>
+    <a v-else-if="activeTab === 'Licks'" href="/guitar-courses/licks" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Licks Courses →</a>
+    <a v-else href="/guitar-courses" class="text-white/40 hover:text-white text-xs uppercase tracking-widest transition duration-200">View all Guitar Courses →</a>
   </div>
+
 </div>
 
 <!-- ===================== BACKING TRACKS MENU ===================== -->
@@ -414,7 +468,7 @@
     <div class="w-40 shrink-0">
       <p class="text-brand text-xs uppercase tracking-widest mb-4">Browse</p>
       <ul class="space-y-3">
-        <li v-for="link in ['All Song Tracks', 'Classic Rock', 'Blues', 'Metal', 'Pop']" :key="link">
+        <li v-for="link in ['All Song Tracks', 'Classic Rock', 'Blues', 'Metal', `80's Rock`]" :key="link">
           <a href="#" class="text-white/60 hover:text-white text-sm transition duration-200">{{ link }}</a>
         </li>
       </ul>
@@ -550,6 +604,7 @@ import {
   learningPathsTab,
   tutorsTabs,
   tutorsMenuTab,
+  courseGenreTab,
 } from '../../data/megaMenuData.js'
 
 const props = defineProps({
@@ -560,7 +615,7 @@ const props = defineProps({
 })
 
 const lessonsTabs = ['Featured', 'New', 'Song Lessons', 'Genre', 'Artists', 'Tutors', 'Most Watched']
-const coursesTabs = ['Featured', 'New', 'Classic Albums', 'Technique', 'Song Courses', 'Beginners', 'Learning Paths', 'Licks', 'Most Watched']
+const coursesTabs = ['Featured', 'New', 'Classic Albums', 'Technique', 'Song Courses', 'Beginners', 'Learning Paths', 'Licks', 'Genre', 'Most Watched']
 const backingTracksTabs = ['Featured', 'Genres', 'Jam Tracks', 'Song Tracks', 'Video Jams']
 
 const tabs = computed(() => {

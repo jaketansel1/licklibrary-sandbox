@@ -1,6 +1,6 @@
 export const lessonsTab = {
   browseLinks: ['All Lessons', 'Latest', 'Most Popular'],
-  skillLevels: ['Beginner', 'Easy', 'Intermediate', 'Expert'],
+  skillLevels: ['Easy', 'Intermediate', 'Expert'],
   popular: [
     { title: 'Smoke on the Water', artist: 'Deep Purple' },
     { title: 'Enter Sandman', artist: 'Metallica' },
@@ -80,10 +80,40 @@ export const lessonsTab = {
 }
 
 export const tabContent = {
+'Technique': {
+    layout: 'portrait',
+    browseLinks: ['All Technique Courses', 'Latest', 'Most Popular'],
+    genres: [],
+    techniqueLinks: ['Soloing & Improvisation', 'Scales', 'Picking Techniques', 'Workouts', 'Practice Routines'],
+    featured: [
+      { title: 'The Extremist', tutor: 'Danny Gill', image: '/course-1.jpg' },
+      { title: 'Are You Experienced', tutor: 'Danny Gill', image: '/course-2.jpg' },
+      { title: 'Dr. Feelgood', tutor: 'Danny Gill', image: '/course-3.jpg' },
+      { title: 'Highway to Hell', tutor: 'Danny Gill', image: '/course-4.jpg' },
+      { title: 'Hotel California', tutor: 'Danny Gill', image: '/course-5.jpg' },
+      { title: 'Dark Side of the Moon', tutor: 'Jamie Humphries', image: '/course-6.jpg' },
+      { title: 'Machine Head', tutor: 'Danny Gill', image: '/course-9.jpg' },
+    ]
+  },
+
+  'Beginners': {
+    layout: 'portrait',
+    browseLinks: ['All Courses'],
+    genres: [],
+    featured: [
+      { title: 'The Extremist', tutor: 'Danny Gill', image: '/course-1.jpg' },
+      { title: 'Are You Experienced', tutor: 'Danny Gill', image: '/course-2.jpg' },
+      { title: 'Dr. Feelgood', tutor: 'Danny Gill', image: '/course-3.jpg' },
+      { title: 'Highway to Hell', tutor: 'Danny Gill', image: '/course-4.jpg' },
+      { title: 'Hotel California', tutor: 'Danny Gill', image: '/course-5.jpg' },
+      { title: 'Dark Side of the Moon', tutor: 'Jamie Humphries', image: '/course-6.jpg' },
+      { title: 'Machine Head', tutor: 'Danny Gill', image: '/course-9.jpg' },
+    ]
+  },
   'Featured': {
     layout: 'portrait',
     browseLinks: ['All Courses', 'Latest', 'Most Popular'],
-    genres: ['Rock', 'Metal', 'Blues', 'Acoustic'],
+    genres: [],
     featured: [
       { title: 'The Extremist', tutor: 'Danny Gill', image: '/course-1.jpg' },
       { title: 'Are You Experienced', tutor: 'Danny Gill', image: '/course-2.jpg' },
@@ -97,7 +127,7 @@ export const tabContent = {
   'New': {
     layout: 'portrait',
     browseLinks: ['All New Courses', 'Latest', 'Most Popular'],
-    genres: ['Rock', 'Metal', '80s', 'Blues'],
+    genres: [],
     featured: [
       { title: 'The Extremist', tutor: 'Danny Gill', image: '/course-1.jpg' },
       { title: 'Are You Experienced', tutor: 'Danny Gill', image: '/course-2.jpg' },
@@ -111,7 +141,7 @@ export const tabContent = {
   'Classic Albums': {
     layout: 'portrait',
     browseLinks: ['All Classic Albums', 'Latest', 'Most Popular'],
-    genres: ['Rock', 'Metal', 'Blues', 'Pop'],
+    genres: ['Rock', 'Metal', "80's Rock"],
     featured: [
       { title: 'Dark Side of the Moon', tutor: 'Jamie Humphries', image: '/course-6.jpg' },
       { title: 'Metallica - The Black Album', tutor: 'Jamie Humphries', image: '/course-7.jpg' },
@@ -122,6 +152,22 @@ export const tabContent = {
       { title: 'Highway to Hell', tutor: 'Danny Gill', image: '/course-4.jpg' },
     ]
   },
+'Licks': {
+    layout: 'portrait',
+    browseLinks: ['All Courses', 'Latest', 'Most Popular'],
+    genres: [],
+    seriesLinks: ['Quick Licks', '51 Licks'],
+    featured: [
+      { title: 'The Extremist', tutor: 'Danny Gill', image: '/course-1.jpg' },
+      { title: 'Are You Experienced', tutor: 'Danny Gill', image: '/course-2.jpg' },
+      { title: 'Dr. Feelgood', tutor: 'Danny Gill', image: '/course-3.jpg' },
+      { title: 'Highway to Hell', tutor: 'Danny Gill', image: '/course-4.jpg' },
+      { title: 'Hotel California', tutor: 'Danny Gill', image: '/course-5.jpg' },
+      { title: 'Dark Side of the Moon', tutor: 'Jamie Humphries', image: '/course-6.jpg' },
+      { title: 'Machine Head', tutor: 'Danny Gill', image: '/course-9.jpg' },
+    ]
+  },
+
   'Learning Paths': {
     layout: 'landscape',
     browseLinks: ['All Learning Paths'],
@@ -144,8 +190,8 @@ export const backingTracksTab = {
     { title: 'Funk Groove Jam', key: 'G Minor', style: 'Funk', image: '/jam-tracks/hero-artist_Stevie_Ray_Vaughan.jpg' },
   ],
   jamTracks: {
-    keys: ['A Minor', 'E Minor', 'G Major', 'D Major', 'C Major'],
-    types: ['Pentatonic', 'Dorian', 'Mixolydian', 'Blues', 'Fusion', 'Fast', 'Slow'],
+    keys: ['All Keys', 'A Minor', 'E Minor', 'G Major', 'C Major', 'G Minor', 'B Minor'],
+    types: ['All Track Types', 'Pentatonic', 'Dorian', 'Mixolydian', 'Fast', 'Slow'],
     featured: [
       { title: 'Minor Pentatonic Jam', key: 'A Minor', image: '/jam-tracks/hero-artist_BB_King.jpg' },
       { title: 'Dorian Groove', key: 'E Dorian', image: '/jam-tracks/hero-artist_Carlos_Santana.jpg' },
@@ -162,11 +208,11 @@ export const backingTracksTab = {
 
 export const learningPathsTab = {
   browseLinks: ['All Learning Paths'],
-  levels: ['Beginner', 'Intermediate', 'Advanced'],
+  levels: ['Easy', 'Intermediate', 'Expert'],
   featured: [
-    { title: '2 Week Scales Bootcamp', tutor: 'Sam Bell', level: 'Beginner', image: '/learning-paths/learningpath-1.jpg' },
+    { title: '2 Week Scales Bootcamp', tutor: 'Sam Bell', level: 'Easy', image: '/learning-paths/learningpath-1.jpg' },
     { title: '2 Week Technique Builder', tutor: 'Sam Bell', level: 'Intermediate', image: '/learning-paths/learningpath-2.jpg' },
-    { title: '10 Classic Rock Songs in 10 Days', tutor: 'Rich Shaw', level: 'Beginner', image: '/learning-paths/learningpath-3.jpg' },
+    { title: '10 Classic Rock Songs in 10 Days', tutor: 'Rich Shaw', level: 'Easy', image: '/learning-paths/learningpath-3.jpg' },
   ]
 }
 
@@ -182,5 +228,33 @@ export const tutorsMenuTab = {
     { name: 'Guthrie Govan', lessons: 91, image: '/tutors/hero-tutor_Guthrie_Govan.jpg' },
     { name: 'Rich Shaw', lessons: 89, image: '/tutors/hero-tutor_Rich_Shaw.jpg' },
     { name: 'Andy James', lessons: 98, image: '/tutors/hero-tutor_Andy_James.jpg' },
+  ]
+}
+
+export const courseGenreTab = {
+  browseLinks: ['All Courses', 'Latest', 'Most Popular'],
+  genres: ['Classic Rock', "80's Rock", 'Rock', 'Blues', 'Metal', 'Acoustic', 'Country', 'Fusion', 'Jazz', 'Pop'],
+  genreFeatures: [
+    {
+      name: 'Classic Rock',
+      courses: [
+        { title: 'Hotel California', tutor: 'Danny Gill', image: '/course-5.jpg' },
+        { title: 'Dark Side of the Moon', tutor: 'Jamie Humphries', image: '/course-6.jpg' },
+      ]
+    },
+    {
+      name: '80\'s Rock',
+      courses: [
+        { title: 'Are You Experienced', tutor: 'Danny Gill', image: '/course-2.jpg' },
+        { title: 'Highway to Hell', tutor: 'Danny Gill', image: '/course-4.jpg' },
+      ]
+    },
+    {
+      name: 'Metal',
+      courses: [
+        { title: 'The Number Of The Beast', tutor: 'Danny Gill', image: '/course-10.jpg' },
+        { title: 'Machine Head', tutor: 'Danny Gill', image: '/course-9.jpg' },
+      ]
+    },
   ]
 }
